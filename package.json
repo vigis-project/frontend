@@ -17,6 +17,8 @@
 		"test:e2e": "playwright test"
 	},
 	"devDependencies": {
+		"@melt-ui/pp": "^0.3.2",
+		"@melt-ui/svelte": "^0.86.3",
 		"@playwright/test": "^1.49.1",
 		"@sveltejs/adapter-auto": "^4.0.0",
 		"@sveltejs/kit": "^2.16.0",
@@ -39,5 +41,8 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"mode-watcher": "^0.5.1"
 	}
 }

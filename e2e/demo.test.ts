@@ -2,5 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test('home page has expected h1', async ({ page }) => {
 	await page.goto('/');
-	await expect(page.locator('h1')).toBeVisible();
+	const locator = page.locator('h1');
+	await expect(locator).toBeVisible();
+	await expect(locator).toContainText('Hi');
 });
