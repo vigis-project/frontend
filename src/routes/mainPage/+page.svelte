@@ -1,4 +1,4 @@
-<div class="upperDiv">
+<header class="upperDiv">
     <section class="logo">
     <h1>Logo</h1>
     </section>
@@ -6,7 +6,7 @@
         <div><p>Авторизация</p></div>
         <div><p>Рестрация</p></div>
     </section>
-</div>
+</header>
 <nav class="navbar">
     <button class="mainButton">Главная</button>
     <button class="mainButton">Начать обмен</button>
