@@ -6,7 +6,7 @@
 </script>
 
 <Header></Header>
-<main class="h-screen w-screen">
+<main class="h-full w-full">
 	{@render children()}
 </main>
 <Footer></Footer>
