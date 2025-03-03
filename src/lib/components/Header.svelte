@@ -7,10 +7,9 @@
 			class="border-border cursor-pointer rounded-md border bg-foreground px-2 py-1 text-background"
 			>Главная</button
 		>
-		<button
-			class="border-border cursor-pointer rounded-md border bg-foreground px-2 py-1 text-background"
-			>Начать обмен</button
-		>
+		<a href="/exchange" class="border-border cursor-pointer rounded-md border bg-foreground px-2 py-1 text-background">
+			Начать обмен
+		</a>		
 		<button
 			class="border-border cursor-pointer rounded-md border bg-foreground px-2 py-1 text-background"
 			>Мои обмены</button
