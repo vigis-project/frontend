@@ -1,187 +1,58 @@
-<div class="MainDiv">
-<section class="mt-14 flex flex-col items-center justify-center">
-	<p id="MainText" class="font-graphiktt flex w-[50%] flex-col items-center justify-center text-xl font-medium">
-		Дай вторую жизнь бумажным книгам
-	</p>
-</section>
-</div>
-<div class="SecondDiv">
-	<section class="mt-14 flex flex-col items-center justify-center">
-		<p id="BookText" class="font-graphiktt flex w-[50%] flex-col items-center justify-center text-xl font-medium">
-			буккроссинг - это свободный обмен бумажными книгами в любых удобных для вас местах
-		</p>
-	</section>
+<script lang="ts">
+	import Section from '$components/Section.svelte';
+	import { concurrent } from 'svelte-typewriter';
+</script>
+
+<div class="gap-13 pt-15 flex flex-col">
+	<Section class="bg-primary-green p-3">
+		<h1
+			use:concurrent={{ cursor: true, interval: 50, keepCursorOnFinish: true }}
+			class="my-auto flex w-full flex-col justify-center text-center text-3xl
+			font-medium md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl"
+		>
+			Дай вторую жизнь бумажным книгам
+		</h1>
+	</Section>
+	<Section class="bg-primary-whiteish mx-6 rounded-md p-3">
+		<q
+			class="my-auto flex w-[60%] flex-col items-center justify-center text-center
+			text-2xl font-medium italic text-black md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+		>
+			Буккроссинг - это свободный обмен бумажными книгами в любых удобных для Вас местах
+		</q>
+	</Section>
+	<div class="gap-13 grid grid-cols-1 xl:grid-cols-2">
+		<Section class="bg-primary-green mx-6 rounded-md p-3 lg:h-[650px]">
+			<p
+				class="my-auto h-fit w-[75%] text-center text-xl font-medium md:w-[50%] md:text-3xl lg:text-4xl"
+			>
+				Обмен книгами (буккроссинг) становится всё более популярен. Это даёт шанс бумажным
+				книгам продлить свою жизнь, помогает владельцам книг делиться хорошими историями и
+				получать новые впечатления.
+			</p>
+		</Section>
+		<Section class="bg-primary-whiteish mx-6 h-[400px] rounded-md p-3 lg:h-[650px]">
+			<p
+				class="my-auto h-fit w-[75%] text-center text-xl font-medium text-black md:w-[50%] md:text-3xl"
+			>
+				Наш сайт предлагает совершить не просто обмен, а добавить к этому увлекательному
+				процессу элемент сюрприза. Подбор книг для обмена будет выполнен по пожеланиям
+				участников, но только при получении книги станет известно, какая именно книга будет
+				радовать своего владельца
+			</p>
+		</Section>
 	</div>
-	<div class="ThirdDiv">
-		<section class="mt-14 flex flex-col items-center justify-center">
-			<p id="briefly" class="font-graphiktt flex w-[50%] flex-col items-center justify-center text-xl font-medium">
-				Кратко
-			</p>
-			<p id="about" class="font-graphiktt flex w-[50%] flex-col items-center justify-center text-xl font-medium">
-				О буккроссинге
-			</p>
-		</section>
-		<p id="ThirdText" class="font-graphiktt flex w-[50%] flex-col items-left justify-start text-xl font-medium">
-			Обмен книгами (буккроссер) становится всё более популярен. Это даёт шанс бумажным
-книгам продлить свою жизнь, помогает владельцам книг делиться хорошими историями и
-получать новые впечатления.
+	<Section class="bg-primary-green mx-6 gap-6 rounded-md p-3 md:gap-12">
+		<h2 class="w-full text-center text-3xl font-medium md:text-5xl lg:text-7xl">Интересно?</h2>
+		<p
+			class="h-fit w-[75%] text-center text-xl font-medium text-white md:w-[50%] md:text-3xl lg:text-5xl"
+		>
+			Тогда начинайте обмен и приглашайте своих друзей поучаствовать!
 		</p>
-		</div>
-		<div class="FourDiv">
-			<section class="mt-14 flex flex-col items-center justify-center">
-				<p id="Community" class="font-graphiktt flex w-[50%] flex-col items-center justify-center text-xl font-medium">
-					Комьюнити
-				</p>
-			</section>
-			<p id="FourText" class="font-graphiktt flex w-[50%] flex-col items-left justify-start text-xl font-medium">
-				Обмен книгами (буккроссер) становится всё более популярен. Это даёт шанс бумажным
-	книгам продлить свою жизнь, помогает владельцам книг делиться хорошими историями и
-	получать новые впечатления.
-			</p>
-			</div>
-			<div class="FiveDiv">
-				<section class="mt-14 flex flex-col items-center justify-center">
-					<p id="Security" class="font-graphiktt flex w-[50%] flex-col items-center justify-center text-xl font-medium">
-						А это безопасно?
-					</p>
-				</section>
-				<p id="FiveText" class="font-graphiktt flex w-[50%] flex-col items-left justify-start text-xl font-medium">
-					Наш сайт предлагает совершить не просто обмен, а добавить к этому увлекательному
-процессу элемент сюрприза. Подбор книг для обмена будет выполнен по пожеланиям участников,
-но только при получении книги станет известно, какая именно книга будет радовать своего
-владельца
-				</p>
-				</div>
-				<div class="MainDiv">
-					<section class="mt-14 flex flex-col items-center justify-center">
-						<p id="intrested" class="font-graphiktt flex w-[50%] flex-col items-center justify-center text-xl font-medium">
-							Интересно?
-						</p>
-						<p id="LastText" class="font-graphiktt flex w-[50%] flex-col items-center justify-center text-xl font-medium">
-							Тогда начинайте обмен и приглашайте своих друзей поучаствовать! 
-						</p>
-						<button class="button"><a href="#" class="hyperlink">Начать обмен</a></button>
-					</section>
-					</div>
-
-
-<style type="text\css">
-	.MainDiv{
-		background-color: #212717;
-		width: 100%;
-		height: 800px;
-	}
-	.SecondDiv{
-		background-color: #EFEEDE;
-		width: 100%;
-		height: 800px;
-	}
-	.ThirdDiv{
-		background-color: #212717;
-		width: 100%;
-		height: fit-content;
-	}
-	.FourDiv{
-		background-color: #EFEEDE;
-		width: 100%;
-		height: fit-content;
-	}
-	.FiveDiv{
-		background-color: #fff3cd;
-		width: 100%;
-		height: fit-content;
-	}
-	#MainText{
-		font-family: var(--font-family);
-font-weight: 400;
-font-size: 96px;
-text-align: center;
-color: #fff;
-margin-top: 10%;
-	}
-	#BookText{
-		font-family: var(--font-family);
-	font-weight: 400;
-	font-size: 64px;
-	text-align: center;
-	color: #000;
-	margin-top: 10%;
-	}
-	#briefly{
-		font-family: var(--third-family);
-font-style: italic;
-font-weight: 400;
-font-size: 40px;
-text-align: center;
-color: #fff;
-	}
-	#about{
-		font-family: var(--second-family);
-font-style: italic;
-font-weight: 400;
-font-size: 64px;
-text-align: center;
-color: #fff;
-	}
-	#ThirdText{
-		font-family: var(--second-family);
-font-style: italic;
-font-weight: 400;
-font-size: 64px;
-color: #fff;
-	}
-	#Community{
-		font-family: var(--second-family);
-font-style: italic;
-font-weight: 400;
-font-size: 96px;
-text-align: center;
-color: #000;
-	}
-	#FourText{
-		font-family: var(--second-family);
-font-weight: 400;
-font-size: 64px;
-color: #000;
-	}
-	#Security{
-		font-family: var(--font-family);
-font-weight: 400;
-font-size: 96px;
-text-align: center;
-color: #000;
-	}
-	#FiveText{
-		font-family: var(--font-family);
-font-weight: 500;
-font-size: 64px;
-color: #000;
-	}
-	#intrested{
-		font-family: var(--font-family);
-font-weight: 500;
-font-size: 96px;
-color: #fff;
-	}
-	#LastText{
-		font-family: var(--font-family);
-font-weight: 500;
-font-size: 64px;
-text-align: center;
-color: #fff;
-	}
-	.button{
-		border-radius: 30px;
-		background: #cfd0ab;
-		width: 1266px;
-height: 115px;
-cursor: pointer;
-	}
-	.hyperlink{
-		font-family: var(--font-family);
-font-weight: 500;
-font-size: 64px;
-text-align: center;
-color: #000;
-	}
-</style>
+		<a
+			class="bg-primary-whiteish hover:bg-primary-whiteish/90 rounded-md px-4 py-3 text-xl
+			 font-medium text-black transition-colors md:text-3xl lg:px-6 lg:py-5 lg:text-5xl"
+			href="/sign-up">Начать обмен</a
+		>
+	</Section>
+</div>
