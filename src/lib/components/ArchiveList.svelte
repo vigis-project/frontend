@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { CompletedExchange } from "$lib/server/types";
-
-    export let exchanges: CompletedExchange[] = [];
+    // let {exchanges} = $props();
+    let {data} = $props();
 </script>
 
 <h2>Архив обменов</h2>
@@ -15,7 +14,8 @@
         </tr>
     </thead>
     <tbody>
-        {#each exchanges as exchange}
+        <!-- {#each exchanges as exchange} -->
+        {#each data as exchange}
             <tr>
                 <td>{exchange.id}</td>
                 <td>{exchange.booksExchanged}</td>

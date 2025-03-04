@@ -3,7 +3,7 @@
 		<h1>Logo</h1>
 	</section>
 	<nav class="flex gap-3 pl-8">
-		<a href="app/exchanges">
+		<a href="/">
 		<button
 			class="border-border cursor-pointer rounded-md border bg-foreground px-2 py-1 text-background"
 			>Главная</button>

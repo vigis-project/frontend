@@ -1,12 +1,13 @@
-import type { Component } from "svelte";
+import type { Component, ComponentProps } from "svelte";
 
-interface User {
+export interface User {
 	id: number;
 	email: string;
 	username: string;
 	firstName: string;
 	lastName: string;
 	secondName: string;
+    avatar: string;
 	rating: number;
 }
 
@@ -38,11 +39,21 @@ export interface Proposal {
     status: string;
 }
 
-export interface Tab{
-    title: String;
-    component: Component;
-}
+// interface proptypes {
+//     data: Proposal | Book;
+// }
 
+// export interface Tab {
+//     title: string;
+//     component: Component<{ data: proptypes; }, {}, "">; 
+//     action: any;
+// }
+
+export interface Tab {
+	title: string;
+    component: Component<{ data: any | null; }, {}, "">; 
+    action: any;
+}
 
 export interface Exchange {
 	

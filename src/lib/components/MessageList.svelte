@@ -1,37 +1,24 @@
 <script lang="ts">
-	import type { Message } from "../server/types";
-
-    export let messages: Message[] = [];
+    let {messages} = $props();
 </script>
 
 <h2>Сообщения</h2>
-
-<table>
+<table class="w-full border-collapse">
     <thead>
         <tr>
-            <th>Отправитель</th>
-            <th>Тема</th>
-            <th>Дата</th>
+            <th class="border px-4 py-2">Отправитель</th>
+            <th class="border px-4 py-2">Тема</th>
+            <th class="border px-4 py-2">Дата</th>
         </tr>
     </thead>
     <tbody>
         {#each messages as message}
             <tr>
-                <td>{message.sender}</td>
-                <td>{message.subject}</td>
-                <td>{new Date(message.timestamp).toLocaleDateString()}</td>
+                <td class="border px-4 py-2">{message.sender}</td>
+                <td class="border px-4 py-2">{message.subject}</td>
+                <td class="border px-4 py-2">{new Date(message.timestamp).toLocaleDateString()}</td>
             </tr>
         {/each}
     </tbody>
 </table>
 
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    th, td {
-        padding: 10px;
-        border: 1px solid #ccc;
-    }
-</style>

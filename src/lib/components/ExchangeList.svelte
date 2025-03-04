@@ -1,14 +1,12 @@
 <script lang="ts">
-	import type { Proposal } from '../server/types';
     import type { Book } from '../server/types';
 
-    export let proposals: Proposal[] = [];
+    // let { proposals } =  $props();
+    let { data } =  $props();
 
-    
-    // function formatBooks(books: Book[]) {
-    //     return (books.map(book) => `${book.author} - ${book.title}`).join(', ');
-    // }
-
+    function formatBooks(books: Book[]) {
+        return books.map((val: Book) => (`${val.author} - ${val.title}`)
+    )}
 
 </script>
 
@@ -24,11 +22,12 @@
         </tr>
     </thead>
     <tbody>
-        {#each proposals as proposal}
+        <!-- {#each proposals as proposal} -->
+        {#each data as proposal}
             <tr>
                 <td>{proposal.id}</td>
-                <!-- <td>{formatBooks(proposal.booksOffered)}</td>
-                <td>{formatBooks(proposal.booksRequested)}</td> -->
+                <td>{formatBooks(proposal.booksOffered)}</td>
+                <td>{formatBooks(proposal.booksRequested)}</td>
                 <td>{proposal.status}</td>
             </tr>
         {/each}
