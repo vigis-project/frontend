@@ -1,12 +1,15 @@
 <script lang="ts">
+	import type { WithElementRef } from "bits-ui";
 	import type { HTMLAttributes } from "svelte/elements";
 
-	type $$Props = HTMLAttributes<HTMLDivElement>;
-
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+	let {
+		ref = $bindable(null),
+		class: className,
+		children,
+		...restProps
+	}: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props();
 </script>
 
-<div class={["flex flex-col space-y-1.5 p-6 pb-0", className]} {...$$restProps}>
-	<slot />
+<div bind:this={ref} class={["flex flex-col space-y-1.5 p-6 pb-0", className]} {...restProps}>
+	{@render children?.()}
 </div>

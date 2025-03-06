@@ -2,12 +2,19 @@
 	import * as Card from "$lib/components/components-ui/Card";
 	import * as Tabs  from "$lib/components/components-ui/Tabs";
 	import ExchangeTab from "./exchange-tab.svelte";
-
 	// import ReceiveTab from "./receive-tab.svelte";
-	// import DeliveryTab from "./delivery-tab.svelte";
-
-	// Exchange form state
+	
+	
+	let title = $state("");
+	let firstName = $state("");
+	let lastName = $state("")
+	let isbn = $state("")
+	let year = $state<number>();
 	let currentTab = $state("exchange");
+	
+	function goToReceive() {
+		currentTab = "receive"; // Меняем значение без set()
+	}
 </script>
 
 <Card.Root class="w-full max-w-6xl mx-auto">
@@ -19,14 +26,14 @@
 		</Tabs.List>
 		<Card.Content>
 			<Tabs.Content value="exchange" class="mt-6">
-				<ExchangeTab />
+				<ExchangeTab next={goToReceive} bind:title bind:firstName bind:isbn bind:lastName bind:year />
 			</Tabs.Content>
 			<Tabs.Content value="receive" class="mt-6">
 				<!-- <ReceiveTab /> -->
 			</Tabs.Content>
 			<Tabs.Content value="delivery" class="mt-6">
 				<!-- <DeliveryTab /> -->
-			</Tabs.Content>
+			 </Tabs.Content>
 		</Card.Content>
 	</Tabs.Root>
 </Card.Root>
