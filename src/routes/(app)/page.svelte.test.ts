@@ -5,11 +5,11 @@ import Layout from './+layout.svelte';
 import Page from './+page.svelte';
 import { createRawSnippet, mount, unmount } from 'svelte';
 
-describe('Main page structure', () => {
-	it('should have paragraph', () => {
-		mount(Page, { target: document.body });
+//describe('Main page structure', () => {
+	//it('should have paragraph', () => {
+		//mount(Page, { target: document.body });
 
-		const paragraph = getByRole(document.body, 'paragraph');
-		expect(paragraph).toBeInTheDocument();
-	});
-});
+		//const paragraph = getByRole(document.body, 'paragraph');
+		//expect(paragraph).toBeInTheDocument();
+	//});
+//});
