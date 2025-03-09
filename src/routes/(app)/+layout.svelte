@@ -6,7 +6,7 @@
 </script>
 
 <Header></Header>
-<main class="h-full w-full">
+<main class="font-graphiktt h-full w-full">
 	{@render children()}
 </main>
 <Footer></Footer>
