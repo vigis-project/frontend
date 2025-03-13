@@ -83,7 +83,7 @@
 					<h5 class="">aVtor</h5>
 					<div class="FlexDirection">
 						<img src="/Group14.svg">
-						<span>GorOd</span>
+						<p>GorOd</p>
 					</div>
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 	<section class="HowItsWorks">
 		<div>
 		<h1 class="MainRulesText">Как это работает</h1>
-		<h3 class="SideRulesText">Обмен книгами — это просто! Всего несколько шагов, и вы уже читаете новую книгу</h3>
+		<p class="SideRulesText">Обмен книгами — это просто! Всего несколько шагов, и вы уже читаете новую книгу</p>
 		</div>
 		<aside class="Rules">
 			<div>
