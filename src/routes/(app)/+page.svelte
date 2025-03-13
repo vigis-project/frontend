@@ -10,9 +10,9 @@
 				<h1 class="MainText">
 					Обменивайтесь книгами с единомышленниками
 				</h1>
-				<h3 class="Secondtext">
+				<p class="Secondtext">
 					Дайте вашим книгам вторую жизнь и откройте для себя новые истории. Наша платформа соединяет любителей чтения по всей стране.
-				</h3>
+				</p>
 			</div>
 			<img src="/Book Stack Outline_Neoclipart_com.svg">
 		</div>
