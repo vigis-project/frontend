@@ -11,44 +11,44 @@
 
 	let categories = $state([
 	{
-			name: "Жанр",
-			expanded: false,
-			selected: false,
-			children: [
-				{ name: "История", selected: false },
-				{ name: "Детектив", selected: false },
-				{ name: "Приключения", selected: false },
-				{ name: "Детские книги", selected: false },
-				{ name: "Мемуары", selected: false },
-				{ name: "Психология", selected: false },
-				{ name: "Фантастика", selected: false },
-				{ name: "Эзотерика", selected: false },
-				{ name: "Фэнтези", selected: false },
-				{ name: "Поэзия", selected: false },
-				{ name: "Драма", selected: false },
-				{ name: "Классика", selected: false },
-				{ name: "Ужасы", selected: false },
-				{ name: "Роман", selected: false }
-			]
-		},
-		{
-			name: "Область наук",
-			expanded: false,
-			selected: false,
-			children: [
-				{ name: "Философия", selected: false },
-				{ name: "Физика", selected: false },
-				{ name: "Химия", selected: false },
-				{ name: "Биология", selected: false },
-				{ name: "Математика", selected: false },
-				{ name: "Информатика", selected: false },
-				{ name: "Лингвистика", selected: false },
-				{ name: "Психология", selected: false },
-				{ name: "Экономика", selected: false },
-				{ name: "История науки", selected: false }
-			]
-		},
-		{
+		name: "Жанр",
+		expanded: false,
+		selected: false,
+		children: [
+			{ name: "История", selected: false },
+			{ name: "Детектив", selected: false },
+			{ name: "Приключения", selected: false },
+			{ name: "Детские книги", selected: false },
+			{ name: "Мемуары", selected: false },
+			{ name: "Психология", selected: false },
+			{ name: "Фантастика", selected: false },
+			{ name: "Эзотерика", selected: false },
+			{ name: "Фэнтези", selected: false },
+			{ name: "Поэзия", selected: false },
+			{ name: "Драма", selected: false },
+			{ name: "Классика", selected: false },
+			{ name: "Ужасы", selected: false },
+			{ name: "Роман", selected: false }
+		]
+	},
+	{
+		name: "Область наук",
+		expanded: false,
+		selected: false,
+		children: [
+			{ name: "Философия", selected: false },
+			{ name: "Физика", selected: false },
+			{ name: "Химия", selected: false },
+			{ name: "Биология", selected: false },
+			{ name: "Математика", selected: false },
+			{ name: "Информатика", selected: false },
+			{ name: "Лингвистика", selected: false },
+			{ name: "Психология", selected: false },
+			{ name: "Экономика", selected: false },
+			{ name: "История науки", selected: false }
+		]
+	},
+	{
 		name: "Обложка",
 		expanded: false,
 		selected: false,
@@ -105,23 +105,18 @@
 		categories[index].expanded = !categories[index].expanded;
 	}
 
-
-	
 	function toggleSelection(parentIndex: number, childIndex: number) {
 		categories[parentIndex].children[childIndex].selected = !categories[parentIndex].children[childIndex].selected;
 		categories[parentIndex].selected = categories[parentIndex].children.some(child => child.selected); // Обновляем родителя
 	} 
-
 
 	function clearSelection() {
 		categories.map((category) => {
 			category.selected = false;
 			category.children.map((child) => {
 				child.selected = false;
-
 				return { ...child };
 			});
-
 			return { ...category  }
 		});
 	}
@@ -130,29 +125,26 @@
 	function validateAndProceed() {
 		const cats = categories;
 		console.log("Текущие категории:", cats);
-
 		const genre = cats.find(cat => cat.name === "Жанр");
 		console.log("Найдена категория 'Жанр':", genre);
 
 		if (!genre) {
-				alert("Категория 'Жанр' не найдена!");
-				return;
+			alert("Категория 'Жанр' не найдена!");
+			return;
 		}
-
 		const isSelected = genre.children.some(child => child.selected);
 		console.log("Выбраны ли подкатегории жанра:", isSelected);
 
 		if (!isSelected) {
-				alert("Выберите хотя бы одну категорию в 'Жанр'!");
-				return;
+		alert("Выберите хотя бы одну категорию в 'Жанр'!");
+		return;
 		}
 
 		console.log("Категория выбрана, выполняем переход...");
-
+		
 		next();
 	}
 
-  
 	$effect(() => {
     isNextEnabled = categories.find(cat => cat.name === "Жанр")?.children.some(child => child.selected) ?? false;
 	});

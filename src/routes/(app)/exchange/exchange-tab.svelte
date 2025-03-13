@@ -31,7 +31,7 @@
 
 		// Подсказки для фамилии (будут подгружаться из БД)
 	let suggestions = $state<string[]>([]);
-	let selectedAuthor = $state<{ lastName: string; firstName: string } | null>(null);
+	
 
 	function formatISBN(event: Event) {
 		let input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); // Удаляем все нецифровые символы
@@ -163,29 +163,29 @@
 		});
 	}
 
+	let firstNameError = $state(false)
+	let lastNameError = $state(false)
 
 	function validateAndProceed() {
-		const cats = categories; // Получаем актуальные данные
-		console.log("Текущие категории:", cats);
-
+		const cats = categories; 
 		const genre = cats.find(cat => cat.name === "Жанр");
-		console.log("Найдена категория 'Жанр':", genre);
-
 		if (!genre) {
 				alert("Категория 'Жанр' не найдена!");
 				return;
 		}
-
 		const isSelected = genre.children.some(child => child.selected);
-		console.log("Выбраны ли подкатегории жанра:", isSelected);
-
 		if (!isSelected) {
 				alert("Выберите хотя бы одну категорию в 'Жанр'!");
 				return;
 		}
-
-		console.log("Категория выбрана, выполняем переход...");
-
+		if (!lastName || lastName.trim() === "") {
+        	alert("Поле 'Фамилия' обязательно для заполнения!");
+        	return;
+    	}
+    	if (!firstName || firstName.trim() === "") {
+        	alert("Поле 'Имя' обязательно для заполнения!");
+        	return;
+    	}
 		next();
 	}
 </script>
@@ -194,73 +194,72 @@
 	<!-- Левая колонка -->
 	<div class="w-1/2 pr-4 flex flex-col h-[400px]">
 			<!-- Автор -->
-			<div class="mb-4">
-					<span class="text-sm font-medium">Автор <span class="text-red-500 font-bold">*</span></span>
-					<div class="flex space-x-2">
-							<input
-									type="text"
-									autocomplete="family-name"
-									aria-label="Фамилия"
-									bind:value={lastName}
-									oninput={(e) => fetchAuthors((e.target as HTMLInputElement).value)}
-									placeholder="Фамилия"
-									class="border p-2 w-1/2 rounded"
-							/>
-							<input
-									type="text"
-									autocomplete="name"
-									aria-label="Имя"
-									bind:value={firstName}
-									placeholder="Имя"
-									class="border p-2 w-1/2 rounded"
-							/>
-					</div>
-					{#if suggestions.length}
-							<ul class="border mt-1 bg-zinc-900 absolute z-10">
-									{#each suggestions as suggestion}
-											<li>
-												<button onclick={() => selectAuthor(suggestion)} class="p-2 cursor-pointer hover:bg-gray-100">
-													{suggestion}
-												</button>
-											</li>
-									{/each}
-							</ul>
-					{/if}
-		</div>
-
-			<!-- Название книги -->
-			<div class="mb-4">
-					<label for="book-title" class="block text-sm font-medium">Название книги *</label>
-					<input id="book-title" type="text" bind:value={title} class="border p-2 w-full rounded" />
+		<div class="mb-4">
+			<span class="text-sm font-medium">Автор <span class="text-red-500 font-bold">*</span></span>
+			<div class="flex space-x-2">
+				<input
+					type="text"
+					autocomplete="family-name"
+					aria-label="Фамилия"
+					bind:value={lastName}
+					oninput={(e) => fetchAuthors((e.target as HTMLInputElement).value) } 
+					placeholder="Фамилия"
+					class="border p-2 w-1/2 rounded"
+					class:border-red-500={lastNameError}
+				/>
+				<input
+					type="text"
+					autocomplete="name"
+					aria-label="Имя"
+					bind:value={firstName}
+					placeholder="Имя"
+					class="border p-2 w-1/2 rounded"
+				/>
 			</div>
-
+			{#if suggestions.length}
+			<ul class="border mt-1 bg-zinc-900 absolute z-10">
+				{#each suggestions as suggestion}
+				<li>
+					<button onclick={() => selectAuthor(suggestion)} class="p-2 cursor-pointer hover:bg-gray-100">
+						{suggestion}
+					</button>
+				</li>
+				{/each}
+			</ul>
+			{/if}
+		</div>
+			<!-- Название книги -->
+		<div class="mb-4">
+			<label for="book-title" class="block text-sm font-medium">Название книги <span class="text-red-500 font-bold">*</span></label>
+			<input id="book-title" type="text" bind:value={title} class="border p-2 w-full rounded" />
+		</div>
 			<!-- ISBN и год издания -->
-		
-			<div class="mb-4">
-				<div class="flex space-x-2">
-						<div class="w-1/2">
-								<label for="isbn" class="block text-sm font-medium">ISBN *</label>
-								<input id="isbn"
-										type="text" 
-										bind:value={isbn} 
-										oninput={formatISBN}
-										placeholder="XXX-X-XXXXX-XXX-X"
-										class="border p-2 w-full rounded placeholder-opacity-50"
-								/>
-						</div>
-						<div class="w-1/2">
-								<label for="publish-year" class="block text-sm font-medium">Год издания *</label>
-								<input 
-										id="publish-year"
-										type="number" 
-										bind:value={year}
-										max={new Date().getFullYear()} 
-										placeholder="Год"
-										class="border p-2 w-full rounded"
-								/>
-						</div>
+		<div class="mb-4">
+			<div class="flex space-x-2">
+				<div class="w-1/2">
+					<label for="isbn" class="block text-sm font-medium">ISBN <span class="text-red-500 font-bold">*</span></label>
+					<input id="isbn"
+						type="text" 
+						bind:value={isbn} 
+						oninput={formatISBN}
+						
+						placeholder="XXX-X-XXXXX-XXX-X"
+						class="border p-2 w-full rounded placeholder-opacity-50"
+					/>
+				</div>
+				<div class="w-1/2">
+					<label for="publish-year" class="block text-sm font-medium">Год издания <span class="text-red-500 font-bold">*</span></label>
+					<input 
+						id="publish-year"
+						type="number" 
+						bind:value={year}
+						max={new Date().getFullYear()} 
+						placeholder="Год"
+						class="border p-2 w-full rounded"
+					/>
 				</div>
 			</div>
+		</div>
 	</div>
 
  
@@ -268,39 +267,37 @@
 	<div class="w-1/2 pl-4 flex flex-col h-[400px]">
 		<!-- Заголовок и кнопка "Снять выделение" -->
 		<div class="flex justify-between items-center mb-4">
-				<h2 class="text-xl font-semibold">Категории</h2>
-				<button onclick={clearSelection} class="bg-blue-500 text-white p-2 rounded px-4">Снять выделение</button>
+			<h2 class="text-xl font-semibold">Категории</h2>
+			<button onclick={clearSelection} class="bg-blue-500 text-white p-2 rounded px-4">Снять выделение</button>
 		</div>
 
 		<!-- Контейнер с прокруткой -->
 		<div class="overflow-y-auto flex-grow pr-2 border rounded bg-zinc-900 p-2">
-				{#each categories as category, parentIndex}
-						<div class="border p-2 mb-2 rounded bg-zinc-800">
-								<button 
-										onclick={() => toggleCategory(parentIndex)} 
-										class="font-bold"
-										style="font-weight: {category.selected ? 'bold' : 'normal'}"
-								>
-										{category.expanded ? "[-]" : "[+]"} {category.name}
-								</button>
-
-								{#if category.expanded}
-										{#each category.children as child, childIndex}
-												<div class="ml-6">
-														<input 
-																type="checkbox" 
-																checked={child.selected} 
-																onchange={() => toggleSelection(parentIndex, childIndex)} 
-														/>
-														<span>{child.name}</span>
-												</div>
-										{/each}
-								{/if}
-						</div>
-				{/each}
+			{#each categories as category, parentIndex}
+				<div class="border p-2 mb-2 rounded bg-zinc-800">
+					<button 
+						onclick={() => toggleCategory(parentIndex)} 
+						class="font-bold"
+						style="font-weight: {category.selected ? 'bold' : 'normal'}"
+					>
+					{category.expanded ? "[-]" : "[+]"} {category.name}
+					</button>
+					{#if category.expanded}
+					{#each category.children as child, childIndex}
+					<div class="ml-6">
+						<input 
+							type="checkbox" 
+							checked={child.selected} 
+							onchange={() => toggleSelection(parentIndex, childIndex)} 
+						/>
+						<span>{child.name}</span>
+					</div>
+					{/each}
+					{/if}
+				</div>
+			{/each}
 		</div>
 		<div class="flex justify-end mt-4">
-
 				<button onclick={validateAndProceed} class="bg-blue-500 text-white p-2 rounded w-[48%]">Далее</button>
 		</div>
 	</div>
