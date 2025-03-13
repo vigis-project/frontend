@@ -2,7 +2,7 @@
 	import * as Card from "$lib/components/components-ui/Card";
 	import * as Tabs  from "$lib/components/components-ui/Tabs";
 	import ExchangeTab from "./exchange-tab.svelte";
-	// import ReceiveTab from "./receive-tab.svelte";
+	import ReceiveTab from "./receive-tab.svelte";
 	
 	
 	let title = $state("");
@@ -14,6 +14,10 @@
 	
 	function goToReceive() {
 		currentTab = "receive"; // Меняем значение без set()
+	}
+	
+	function goToExchange() {
+		currentTab = "exchange"; // Меняем значение без set()
 	}
 </script>
 
@@ -29,7 +33,7 @@
 				<ExchangeTab next={goToReceive} bind:title bind:firstName bind:isbn bind:lastName bind:year />
 			</Tabs.Content>
 			<Tabs.Content value="receive" class="mt-6">
-				<!-- <ReceiveTab /> -->
+				<ReceiveTab next={goToReceive} prev={goToExchange} bind:title />
 			</Tabs.Content>
 			<Tabs.Content value="delivery" class="mt-6">
 				<!-- <DeliveryTab /> -->
