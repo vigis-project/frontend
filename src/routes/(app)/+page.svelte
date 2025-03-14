@@ -151,7 +151,7 @@
 				</div>
 				<div class="p-4">
 					<h3 class="font-semibold line-clamp-1 text-walnut-light">Название книги {book}</h3>
-					<p class="text-sm text-walnut-light/70 line-clamp-1">Автор книги</p>
+					<span class="text-sm text-walnut-light/70 line-clamp-1">Автор книги</span>
 					<div class="mt-2 flex items-center text-sm">
 					<MapPin class="h-3.5 w-3.5 mr-1 text-walnut-light/70" />
 					<span class="text-xs text-walnut-light/70">Москва</span>
@@ -176,9 +176,9 @@
 		  <div class="flex flex-col items-center justify-center space-y-4 text-center">
 			<div class="space-y-2">
 			  <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl text-walnut-light">Как это работает</h2>
-			  <p class="max-w-[900px] text-walnut-light/70 md:text-lg">
+			  <span class="max-w-[900px] text-walnut-light/70 md:text-lg">
 				Обмен книгами — это просто! Всего несколько шагов, и вы уже читаете новую книгу
-			  </p>
+			  </span>
 			</div>
 		  </div>
 		  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
@@ -187,27 +187,27 @@
 				<BookOpen class="h-8 w-8 text-walnut-light" />
 			  </div>
 			  <h3 class="text-xl font-bold text-walnut-light">1. Добавьте свои книги</h3>
-			  <p class="text-walnut-light/70">
+			  <span class="text-walnut-light/70">
 				Сфотографируйте и добавьте книги, которыми вы готовы поделиться с другими
-			  </p>
+			  </span>
 			</div>
 			<div class="flex flex-col items-center text-center space-y-4">
 			  <div class="flex h-16 w-16 items-center justify-center rounded-full bg-walnut-light/10">
 				<Search class="h-8 w-8 text-walnut-light" />
 			  </div>
 			  <h3 class="text-xl font-bold text-walnut-light">2. Найдите интересные книги</h3>
-			  <p class="text-walnut-light/70">
+			  <span class="text-walnut-light/70">
 				Просматривайте каталог и находите книги, которые хотели бы прочитать
-			  </p>
+			  </span>
 			</div>
 			<div class="flex flex-col items-center text-center space-y-4">
 			  <div class="flex h-16 w-16 items-center justify-center rounded-full bg-walnut-light/10">
 				<RefreshCw class="h-8 w-8 text-walnut-light" />
 			  </div>
 			  <h3 class="text-xl font-bold text-walnut-light">3. Договоритесь об обмене</h3>
-			  <p class="text-walnut-light/70">
+			  <span class="text-walnut-light/70">
 				Свяжитесь с владельцем книги и договоритесь о встрече или отправке по почте
-			  </p>
+			  </span>
 			</div>
 		  </div>
 		</div>
@@ -218,9 +218,9 @@
 		  <div class="flex flex-col items-center justify-center space-y-4 text-center">
 			<div class="space-y-2">
 			  <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl text-walnut-light">Отзывы участников</h2>
-			  <p class="max-w-[900px] text-walnut-light/70 md:text-lg">
+			  <span class="max-w-[900px] text-walnut-light/70 md:text-lg">
 				Что говорят о нас любители книг, уже присоединившиеся к сообществу
-			  </p>
+			  </span>
 			</div>
 		  </div>
 		  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -236,13 +236,13 @@
 					/>
 					<div>
 					<h3 class="font-semibold text-walnut-light">Анна К.</h3>
-					<p class="text-sm text-walnut-light/70">Москва</p>
+					<span class="text-sm text-walnut-light/70">Москва</span>
 					</div>
 				</div>
-				<p class="mt-4 text-walnut-light/70">
+				<span class="mt-4 text-walnut-light/70">
 					"Благодаря КнигоОбмену я нашла редкое издание, которое давно искала. Процесс обмена прошел очень
 					легко и приятно. Теперь регулярно обмениваюсь книгами и познакомилась с интересными людьми."
-				</p>
+				</span>
 				</div>
 			{/each}
 		  </div>
@@ -255,9 +255,9 @@
 			  <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl text-walnut-light">
 				Присоединяйтесь к сообществу книголюбов
 			  </h2>
-			  <p class="max-w-[900px] text-walnut-light/70 md:text-lg">
+			  <h1 class="max-w-[900px] text-walnut-light/70 md:text-lg">
 				Более 10 000 пользователей уже обмениваются книгами на нашей платформе
-			  </p>
+			  </h1>
 			</div>
 			<div class="flex flex-col sm:flex-row gap-4">
 			  <button  class="bg-walnut-light text-walnut-dark hover:bg-walnut-accent">
@@ -284,9 +284,9 @@
 			  <BookOpen class="h-5 w-5 text-walnut-light" />
 			  <span class="font-bold text-walnut-light">КнигоОбмен</span>
 			</a>
-			<p class="text-sm text-walnut-light/70 max-w-xs">
+			<span class="text-sm text-walnut-light/70 max-w-xs">
 			  Платформа для обмена книгами между любителями чтения по всей стране
-			</p>
+			</span>
 		  </div>
 		  <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
 			<div class="space-y-2">
@@ -372,7 +372,7 @@
 		  </div>
 		</div>
 		<div class="flex flex-col md:flex-row justify-between items-center gap-4 border-t pt-4">
-		  <p class="text-xs text-walnut-light/70">© 2025 КнигоОбмен. Все права защищены.</p>
+		  <span class="text-xs text-walnut-light/70">© 2025 КнигоОбмен. Все права защищены.</span>
 		  <div class="flex items-center gap-4">
 			<a href="#" class="text-walnut-light/70 hover:text-walnut-light">
 			  <svg

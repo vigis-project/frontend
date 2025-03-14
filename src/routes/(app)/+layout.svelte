@@ -9,4 +9,4 @@
 <main class="font-graphiktt h-full w-full">
 	{@render children()}
 </main>
-<Footer></Footer>
+<!-- <Footer></Footer> -->
