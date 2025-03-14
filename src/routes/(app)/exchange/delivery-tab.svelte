@@ -79,10 +79,9 @@
         }
     }
 
-    // Валидация отчества
     function validateSurName(event: Event) {
         const input = (event.target as HTMLInputElement).value;
-        const regex = /^[А-Яа-яЁё]{1,25}$/; // Только кириллица, до 25 символов
+        const regex = /^[А-Яа-яЁё]{1,25}$/; 
     
         if (!regex.test(input)) {
             surNameError = true;
@@ -90,13 +89,11 @@
             surNameError = false;
         }
     }
-    
-    // Проверка на пустое поле
+
     function validateField(value: string) {
         return !value || value.trim() === "";
     }
-    
-    // Проверка всех полей
+
     function validateAllFields() {
         cityEmptyError = validateField(city);
         streetError = validateField(street);
