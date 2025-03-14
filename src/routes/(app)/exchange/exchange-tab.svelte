@@ -1,4 +1,6 @@
 <script lang="ts">
+	
+
 	type Props = {
 		next: () => void;
 		title?: string;
@@ -10,18 +12,14 @@
 
 	let { next, title = $bindable(""), isbn = $bindable(""), lastName = $bindable(""), firstName = $bindable(""), year = $bindable()  }: Props = $props();
 
-
-		
 	async function fetchAuthors(query: string) {	
-			if (query.length < 1) {
-					suggestions = [];
-					return;
-			}
-			
-			const allAuthors = ["Булгаков", "Бунин", "Блок", "Брюсов"];
-			suggestions = allAuthors.filter((author) => author.startsWith(query));
+		if (query.length < 1) {
+				suggestions = [];
+				return;
+		}
+		const allAuthors = ["Булгаков", "Бунин", "Блок", "Брюсов"];
+		suggestions = allAuthors.filter((author) => author.startsWith(query));
 	}
-		
 		
 	function selectAuthor(author: string) {
 			lastName = author;
@@ -29,9 +27,7 @@
 			suggestions = [];
 	}
 
-		
 	let suggestions = $state<string[]>([]);
-	
 
 	function formatISBN(event: Event) {
 		let input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); 
@@ -45,6 +41,13 @@
 
 		isbn = formatted;
 	}
+
+	function formatyear(event: Event) {
+        const input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); // Удаляем всё, кроме цифр
+        const maxLength = 4; // Ограничение на 4 символа
+        const truncatedInput = input.slice(0, maxLength); // Обрезаем ввод до 4 символов
+        year = truncatedInput ? Number(truncatedInput) : undefined; // Преобразуем в число или undefined, если пусто
+    }
 
 	let categories = $state([
 	{
@@ -142,13 +145,10 @@
 		categories[index].expanded = !categories[index].expanded;
 	}
 
-
-	
 	function toggleSelection(parentIndex: number, childIndex: number) {
 		categories[parentIndex].children[childIndex].selected = !categories[parentIndex].children[childIndex].selected;
 		categories[parentIndex].selected = categories[parentIndex].children.some(child => child.selected); 
 	} 
-
 
 	function clearSelection() {
 		categories.map((category) => {
@@ -162,9 +162,6 @@
 			return { ...category  }
 		});
 	}
-
-
-
  
  	function validateField(value: string | number | undefined) {
         if (typeof value === "string") {
@@ -184,7 +181,6 @@
     let isbnEmptyError = $state(false);
     let yearEmptyError = $state(false);
 
-
 	function validateLastName(event: Event) {
         const input = (event.target as HTMLInputElement).value;
         const regex = /^[А-Яа-яЁё]{1,50}$/; 
@@ -195,7 +191,6 @@
             lastNameValidationError = false;
         }
     }
-    
    
     function validateFirstName(event: Event) {
         const input = (event.target as HTMLInputElement).value;
@@ -239,13 +234,10 @@
            
             return false;
         }
-    
         return true;
-	
         
     }
 
-    
     function confirmData() {
         if (validateAllFields()) {
             
@@ -351,7 +343,7 @@
 						<input
 							type="text"
 							bind:value={isbn}
-							oninput={(e) => {
+							oninput={(e) => { 
 								formatISBN(e); 
 								isbnEmptyError = validateField(isbn); 
 							}}
@@ -369,10 +361,13 @@
 					<div class="w-1/2">
 						<span class="block text-sm font-medium">Год издания <span class="text-red-500 font-bold">*</span></span>
 						<input
-							type="number"
+							type="text" 
 							bind:value={year}
-							oninput={() => yearEmptyError = validateField(year)} 
-							onblur={() => yearEmptyError = validateField(year)} 
+							oninput={(e) => {
+								formatyear(e); // Форматируем ввод
+								yearEmptyError = validateField(year); // Проверяем на пустое значение
+							}}
+							onblur={() => yearEmptyError = validateField(year)}
 							max={new Date().getFullYear()}
 							placeholder="Год"
 							class="border p-2 w-full rounded"
@@ -400,7 +395,7 @@
 			{#each categories as category, parentIndex}
 				<div class="border p-2 mb-2 rounded bg-zinc-800">
 					<button 
-						onclick={() => toggleCategory(parentIndex)} 
+						onclick={() => toggleCategory(parentIndex)}
 						class="font-bold"
 						style="font-weight: {category.selected ? 'bold' : 'normal'}"
 					>
