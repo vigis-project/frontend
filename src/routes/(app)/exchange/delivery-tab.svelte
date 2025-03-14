@@ -31,7 +31,7 @@
         index = input.slice(0, maxLength);
     }
     
-    // Состояния ошибок
+    
     let lastNameEmptyError = $state(false);
     let lastNameValidationError = $state(false);
     let cityEmptyError = $state(false);
@@ -44,10 +44,10 @@
     let firstNameValidationError = $state(false);
     let surNameError = $state(false);
     
-    // Валидация фамилии
+    
     function validateLastName(event: Event) {
         const input = (event.target as HTMLInputElement).value;
-        const regex = /^[А-Яа-яЁё]{1,50}$/; // Только кириллица, до 50 символов
+        const regex = /^[А-Яа-яЁё]{1,50}$/; 
     
         if (!regex.test(input)) {
             lastNameValidationError = true;
@@ -56,10 +56,10 @@
         }
     }
     
-    // Валидация имени
+    
     function validateFirstName(event: Event) {
         const input = (event.target as HTMLInputElement).value;
-        const regex = /^[А-Яа-яЁё]{1,25}$/; // Только кириллица, до 25 символов
+        const regex = /^[А-Яа-яЁё]{1,25}$/; 
     
         if (!regex.test(input)) {
             firstNameValidationError = true;
@@ -70,7 +70,7 @@
     
     function validateCity(event: Event) {
         const input = (event.target as HTMLInputElement).value;
-        const regex = /^[А-Яа-яЁё]{1,15}$/; // Только кириллица, до 25 символов
+        const regex = /^[А-Яа-яЁё]{1,15}$/; 
     
         if (!regex.test(input)) {
             cityValidationError = true;
@@ -104,17 +104,17 @@
         firstNameEmptyError = validateField(firstName);
     
         if (cityEmptyError || streetError || buildingError || householdError || indexError || lastNameEmptyError || firstNameEmptyError) {
-            alert("Заполните все обязательные поля!");
+            
             return false;
         }
     
         return true;
     }
     
-    // Подтверждение данных
+    
     function confirmData() {
         if (validateAllFields()) {
-            alert("Данные успешно подтверждены!");
+            
         }
     }
     </script>
@@ -305,6 +305,6 @@
     
     <!-- Кнопки -->
     <div class="flex justify-between mt-4">	
-        <button onclick={prev} class="bg-blue-500 text-white p-2 rounded w-[48%]">Назад</button>
-        <button onclick={confirmData} class="bg-blue-500 text-white p-2 rounded w-[48%]">Подтвердить данные</button>
+        <button onclick={prev} class="bg-gray-500 text-white p-2 rounded px-20">Назад</button>
+        <button onclick={confirmData} class="bg-blue-500 text-white p-2 rounded px-6">Подтвердить данные</button>
     </div>

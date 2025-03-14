@@ -186,18 +186,21 @@
 		{/each}
 		</div>
 		<div class="flex justify-between mt-4">	
-            <button onclick={prev} class="bg-gray-500 text-white p-2 rounded w-[48%]">Назад</button>
-			<button 
-			    onclick={() => validateAndProceed()} 
-			    class="{isNextEnabled ? 'bg-blue-500' : 'bg-gray-500 cursor-not-allowed'} text-white p-2 rounded w-[48%]" 
-			    disabled={!isNextEnabled}>
-			    Далее
-			</button>
-        </div>
+		</div>
 	</div>
 </div>
 
-	
+
+<div class="flex justify-between mt-4">	
+	<button onclick={prev} class="bg-gray-500 text-white p-2 rounded px-20">Назад</button>
+	<button 
+	onclick={() => validateAndProceed()} 
+	class="{isNextEnabled ? 'bg-blue-500' : 'bg-gray-500 cursor-not-allowed'} text-white p-2 rounded px-20" 
+	disabled={!isNextEnabled}>
+	Далее
+</button>
+</div>
+
 <style>
 		button {
 			cursor: pointer;

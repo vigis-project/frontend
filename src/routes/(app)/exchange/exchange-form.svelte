@@ -35,9 +35,9 @@
 <Card.Root class="w-full max-w-6xl mx-auto">
 	<Tabs.Root bind:value={currentTab} class="w-full">
 		<Tabs.List class="w-full grid grid-cols-3 rounded-none">
-			<Tabs.Trigger value="exchange" class="rounded-none">Хочу обменять</Tabs.Trigger>
-			<Tabs.Trigger value="receive" class="rounded-none">Хочу получить</Tabs.Trigger>
-			<Tabs.Trigger value="delivery" class="rounded-none">Адрес доставки </Tabs.Trigger>
+			<Tabs.Trigger value="exchange" class="rounded-none" disabled>Хочу обменять</Tabs.Trigger>
+			<Tabs.Trigger value="receive" class="rounded-none" disabled>Хочу получить</Tabs.Trigger>
+			<Tabs.Trigger value="delivery" class="rounded-none" disabled>Адрес доставки </Tabs.Trigger>
 		</Tabs.List>
 		<Card.Content>
 			<Tabs.Content value="exchange" >

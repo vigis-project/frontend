@@ -29,26 +29,7 @@
 
 	let suggestions = $state<string[]>([]);
 
-	function formatISBN(event: Event) {
-		let input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); 
-
-		let formatted = "";
-		if (input.length > 0) formatted += input.slice(0, 3);
-		if (input.length > 3) formatted += "-" + input.slice(3, 4);
-		if (input.length > 4) formatted += "-" + input.slice(4, 9);
-		if (input.length > 9) formatted += "-" + input.slice(9, 12);
-		if (input.length > 12) formatted += "-" + input.slice(12, 13);
-
-		isbn = formatted;
-	}
-
-	function formatyear(event: Event) {
-        const input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); // Удаляем всё, кроме цифр
-        const maxLength = 4; // Ограничение на 4 символа
-        const truncatedInput = input.slice(0, maxLength); // Обрезаем ввод до 4 символов
-        year = truncatedInput ? Number(truncatedInput) : undefined; // Преобразуем в число или undefined, если пусто
-    }
-
+	
 	let categories = $state([
 	{
 			name: "Жанр",
@@ -172,6 +153,8 @@
         return true; 
     }
 
+	
+
 	let firstNameEmptyError = $state(false);
     let firstNameValidationError = $state(false);
 	let lastNameEmptyError = $state(false);
@@ -180,10 +163,40 @@
 	let titleValidationError = $state(false);
     let isbnEmptyError = $state(false);
     let yearEmptyError = $state(false);
+	let yearValidationError = $state(false); 
+	let genreError = $state(false); 
+
+	function formatISBN(event: Event) {
+		let input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); 
+
+		let formatted = "";
+		if (input.length > 0) formatted += input.slice(0, 3);
+		if (input.length > 3) formatted += "-" + input.slice(3, 4);
+		if (input.length > 4) formatted += "-" + input.slice(4, 9);
+		if (input.length > 9) formatted += "-" + input.slice(9, 12);
+		if (input.length > 12) formatted += "-" + input.slice(12, 13);
+
+		isbn = formatted;
+	}
+
+	function formatyear(event: Event) {
+    const input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); 
+    const maxLength = 4;
+    const truncatedInput = input.slice(0, maxLength); 
+    const currentYear = new Date().getFullYear(); 
+
+    if (truncatedInput && Number(truncatedInput) > currentYear) {
+        yearValidationError = true; 
+    } else {
+        yearValidationError = false;
+    }
+
+    year = truncatedInput ? Number(truncatedInput) : undefined; 
+	}
 
 	function validateLastName(event: Event) {
         const input = (event.target as HTMLInputElement).value;
-        const regex = /^[А-Яа-яЁё]{1,50}$/; 
+        const regex = /^[A-Za-zА-Яа-яЁё]{1,50}$/; 
     
         if (!regex.test(input)) {
             lastNameValidationError = true;
@@ -194,7 +207,7 @@
    
     function validateFirstName(event: Event) {
         const input = (event.target as HTMLInputElement).value;
-        const regex = /^[А-Яа-яЁё]{1,25}$/; 
+        const regex = /^[A-Za-zА-Яа-яЁё]{1,20}$/; 
     
         if (!regex.test(input)) {
             firstNameValidationError = true;
@@ -214,29 +227,31 @@
 	}
 
 	function validateAllFields() {
-		const cats = categories;
-        const genre = cats.find(cat => cat.name === "Жанр");
-        if (!genre) {
-            return false;
-        }
-        const isSelected = genre.children.some(child => child.selected);
-        if (!isSelected) {
-            return false;
-        }
-
-		lastNameEmptyError = validateField(lastName);
-        firstNameEmptyError = validateField(firstName);
-		titleEmptyError = validateField(title);
-		isbnEmptyError= validateField(isbn);
-		yearEmptyError= validateField(year);
-
-		if (lastNameEmptyError || firstNameEmptyError || titleEmptyError || isbnEmptyError || yearEmptyError) {
-           
-            return false;
-        }
-        return true;
-        
+    const cats = categories;
+    const genre = cats.find(cat => cat.name === "Жанр");
+    if (!genre) {
+        genreError = true; 
+        return false;
     }
+    const isSelected = genre.children.some(child => child.selected);
+    if (!isSelected) {
+        genreError = true; 
+        return false;
+    } else {
+        genreError = false; 
+    }
+
+    lastNameEmptyError = validateField(lastName);
+    firstNameEmptyError = validateField(firstName);
+    titleEmptyError = validateField(title);
+    isbnEmptyError = validateField(isbn);
+    yearEmptyError = validateField(year);
+
+    if (lastNameEmptyError || firstNameEmptyError || titleEmptyError || isbnEmptyError || yearEmptyError || yearValidationError) {
+        return false;
+    }
+    return true;
+}
 
     function confirmData() {
         if (validateAllFields()) {
@@ -361,20 +376,23 @@
 					<div class="w-1/2">
 						<span class="block text-sm font-medium">Год издания <span class="text-red-500 font-bold">*</span></span>
 						<input
-							type="text" 
+							type="text"
 							bind:value={year}
 							oninput={(e) => {
-								formatyear(e); // Форматируем ввод
-								yearEmptyError = validateField(year); // Проверяем на пустое значение
+								formatyear(e); 
+								yearEmptyError = validateField(year); 
 							}}
 							onblur={() => yearEmptyError = validateField(year)}
 							max={new Date().getFullYear()}
 							placeholder="Год"
 							class="border p-2 w-full rounded"
-							class:border-red-500={yearEmptyError}
+							class:border-red-500={yearEmptyError || yearValidationError}
 						/>
 						{#if yearEmptyError}
 							<span class="text-red-500 text-sm">Обязательно к заполнению.</span>
+						{/if}
+						{#if yearValidationError && !yearEmptyError}
+							<span class="text-red-500 text-sm">Некорректный формат.</span>
 						{/if}
 					</div>
 				</div>
@@ -391,35 +409,38 @@
 		</div>
 
 		<!-- Контейнер с прокруткой -->
-		<div class="overflow-y-auto flex-grow pr-2 border rounded bg-zinc-900 p-2">
-			{#each categories as category, parentIndex}
-				<div class="border p-2 mb-2 rounded bg-zinc-800">
-					<button 
-						onclick={() => toggleCategory(parentIndex)}
-						class="font-bold"
-						style="font-weight: {category.selected ? 'bold' : 'normal'}"
-					>
-					{category.expanded ? "[-]" : "[+]"} {category.name}
-					</button>
-					{#if category.expanded}
-					{#each category.children as child, childIndex}
-					<div class="ml-6">
-						<input 
-							type="checkbox" 
-							checked={child.selected} 
-							onchange={() => toggleSelection(parentIndex, childIndex)} 
-						/>
-						<span>{child.name}</span>
-					</div>
-					{/each}
-					{/if}
-				</div>
-			{/each}
+		<div class="overflow-y-auto flex-grow pr-2 border rounded bg-zinc-900 p-2" class:border-red-500={genreError}>
+		    {#each categories as category, parentIndex}
+		        <div class="border p-2 mb-2 rounded bg-zinc-800">
+		            <button 
+		                onclick={() => toggleCategory(parentIndex)}
+		                class="font-bold"
+		                style="font-weight: {category.selected ? 'bold' : 'normal'}"
+		            >
+		            {category.expanded ? "[-]" : "[+]"} {category.name}
+		            </button>
+		            {#if category.expanded}
+		            {#each category.children as child, childIndex}
+		            <div class="ml-6">
+		                <input 
+		                    type="checkbox" 
+		                    checked={child.selected} 
+		                    onchange={() => toggleSelection(parentIndex, childIndex)} 
+		                />
+		                <span>{child.name}</span>
+		            </div>
+		            {/each}
+		            {/if}
+		        </div>
+		    {/each}
 		</div>
-		<div class="flex justify-end mt-4">
-            <button onclick={confirmData} class="bg-blue-500 text-white p-2 rounded w-[48%]">Далее</button>
-        </div>
+		{#if genreError}
+		    <span class="text-red-500 text-sm mt-2">Выберите жанр!</span>
+		{/if}
 	</div>
+</div>
+<div class="flex justify-end mt-4">
+	<button onclick={confirmData} class="bg-blue-500 text-white p-2 rounded px-20">Далее</button>
 </div>
 
 	
