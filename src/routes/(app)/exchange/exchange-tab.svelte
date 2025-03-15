@@ -1,6 +1,5 @@
 <script lang="ts">
 	
-
 	type Props = {
 		next: () => void;
 		title?: string;
@@ -28,7 +27,6 @@
 	}
 
 	let suggestions = $state<string[]>([]);
-
 	
 	let categories = $state([
 	{
@@ -127,9 +125,13 @@
 	}
 
 	function toggleSelection(parentIndex: number, childIndex: number) {
-		categories[parentIndex].children[childIndex].selected = !categories[parentIndex].children[childIndex].selected;
-		categories[parentIndex].selected = categories[parentIndex].children.some(child => child.selected); 
-	} 
+    categories[parentIndex].children[childIndex].selected = !categories[parentIndex].children[childIndex].selected;
+    categories[parentIndex].selected = categories[parentIndex].children.some(child => child.selected);
+
+    if (categories[parentIndex].name === "Жанр") {
+        genreError = !categories[parentIndex].selected;
+    }
+}
 
 	function clearSelection() {
 		categories.map((category) => {
@@ -152,8 +154,6 @@
         }
         return true; 
     }
-
-	
 
 	let firstNameEmptyError = $state(false);
     let firstNameValidationError = $state(false);
@@ -180,78 +180,93 @@
 	}
 
 	function formatyear(event: Event) {
-    const input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); 
-    const maxLength = 4;
-    const truncatedInput = input.slice(0, maxLength); 
-    const currentYear = new Date().getFullYear(); 
+    	const input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); 
+    	const maxLength = 4;
+    	const truncatedInput = input.slice(0, maxLength); 
+    	const currentYear = new Date().getFullYear(); 
 
-    if (truncatedInput && Number(truncatedInput) > currentYear) {
-        yearValidationError = true; 
-    } else {
-        yearValidationError = false;
-    }
+    	if (truncatedInput && Number(truncatedInput) > currentYear) {
+    	    yearValidationError = true; 
+    	} else {
+    	    yearValidationError = false;
+    	}
 
-    year = truncatedInput ? Number(truncatedInput) : undefined; 
+    	year = truncatedInput ? Number(truncatedInput) : undefined; 
 	}
 
-	function validateLastName(event: Event) {
-        const input = (event.target as HTMLInputElement).value;
-        const regex = /^[A-Za-zА-Яа-яЁё]{1,50}$/; 
-    
-        if (!regex.test(input)) {
-            lastNameValidationError = true;
-        } else {
-            lastNameValidationError = false;
-        }
-    }
-   
-    function validateFirstName(event: Event) {
-        const input = (event.target as HTMLInputElement).value;
-        const regex = /^[A-Za-zА-Яа-яЁё]{1,20}$/; 
-    
-        if (!regex.test(input)) {
-            firstNameValidationError = true;
-        } else {
-            firstNameValidationError = false;
-        }
-    }
+	function validateYear(event: Event) {
+    	const input = (event.target as HTMLInputElement).value;
+    	const currentYear = new Date().getFullYear();
+    	const regex = /^\d{4}$/; 
 
-	function validateTitle(event: Event) {
-    const input = (event.target as HTMLInputElement).value;
-
-    	if (input.length < 1 || input.length > 50) {
-    	    titleValidationError = true; 
+    	if (!regex.test(input) || Number(input) > currentYear) {
+    	    yearValidationError = true;
     	} else {
-    	    titleValidationError = false; 
+    	    yearValidationError = false;
     	}
 	}
 
+	function validateLastName(event: Event) {
+    	const input = (event.target as HTMLInputElement).value;
+    	const regex = /^[A-Za-zА-Яа-яЁё]{2,50}$/; 
+		
+    	if (!regex.test(input)) {
+    	    lastNameValidationError = true;
+    	} else {
+    	    lastNameValidationError = false;
+    	}
+	}
+   
+    function validateFirstName(event: Event) {
+    	const input = (event.target as HTMLInputElement).value;
+    	const regex = /^[A-Za-zА-Яа-яЁё]{2,25}$/; 
+
+    	if (!regex.test(input)) {
+    	    firstNameValidationError = true;
+    	} else {
+    	    firstNameValidationError = false;
+    	}
+	}
+
+	function validateTitle(event: Event) {
+    	const input = (event.target as HTMLInputElement).value;
+    	const regex = /^[A-Za-zА-Яа-яЁё0-9\s"',.!?\-]{1,50}$/; 
+
+    	if (!regex.test(input)) {
+    	    titleValidationError = true;
+    	} else {
+    	    titleValidationError = false;
+    	}
+	}
+
+	
+
 	function validateAllFields() {
-    const cats = categories;
-    const genre = cats.find(cat => cat.name === "Жанр");
-    if (!genre) {
-        genreError = true; 
-        return false;
-    }
-    const isSelected = genre.children.some(child => child.selected);
-    if (!isSelected) {
-        genreError = true; 
-        return false;
-    } else {
-        genreError = false; 
-    }
+    	const cats = categories;
+    	const genre = cats.find(cat => cat.name === "Жанр");
+    	if (!genre) {
+    	    genreError = true;
+    	    return false;
+    	}
+    	const isSelected = genre.children.some(child => child.selected);
+    	if (!isSelected) {
+    	    genreError = true;
+    	    return false;
+    	} else {
+    	    genreError = false;
+    	}
 
-    lastNameEmptyError = validateField(lastName);
-    firstNameEmptyError = validateField(firstName);
-    titleEmptyError = validateField(title);
-    isbnEmptyError = validateField(isbn);
-    yearEmptyError = validateField(year);
+    	lastNameEmptyError = validateField(lastName);
+    	firstNameEmptyError = validateField(firstName);
+    	titleEmptyError = validateField(title);
+    	isbnEmptyError = validateField(isbn);
+    	yearEmptyError = validateField(year);
 
-    if (lastNameEmptyError || firstNameEmptyError || titleEmptyError || isbnEmptyError || yearEmptyError || yearValidationError) {
-        return false;
-    }
-    return true;
-}
+    	if (lastNameEmptyError || firstNameEmptyError || titleEmptyError || isbnEmptyError || yearEmptyError || yearValidationError) {
+    	    return false;
+    	}
+    	return true;
+	}
 
     function confirmData() {
         if (validateAllFields()) {
@@ -346,7 +361,7 @@
 				<span class="text-red-500 text-sm">Обязательно к заполнению.</span>
 			{/if}
 			{#if titleValidationError && !titleEmptyError}
-				<span class="text-red-500 text-sm">Некорректное формат.</span>
+				<span class="text-red-500 text-sm">Некорректный формат</span>
 			{/if}
 		</div>
 			<!-- ISBN и год издания -->
@@ -381,8 +396,12 @@
 							oninput={(e) => {
 								formatyear(e); 
 								yearEmptyError = validateField(year); 
+								validateYear(e);
 							}}
-							onblur={() => yearEmptyError = validateField(year)}
+							onblur={(e) => {
+								yearEmptyError = validateField(year);
+								validateYear(e); 
+							}}
 							max={new Date().getFullYear()}
 							placeholder="Год"
 							class="border p-2 w-full rounded"
@@ -405,34 +424,34 @@
 		<!-- Заголовок и кнопка "Снять выделение" -->
 		<div class="flex justify-between items-center mb-4">
 			<h2 class="text-xl font-semibold">Категории</h2>
-			<button onclick={clearSelection} class="bg-blue-500 text-white p-2 rounded px-4">Снять выделение</button>
+			<button onclick={clearSelection} class="bg-gray-500 text-white p-2 rounded px-4">Снять выделение</button>
 		</div>
 
 		<!-- Контейнер с прокруткой -->
 		<div class="overflow-y-auto flex-grow pr-2 border rounded bg-zinc-900 p-2" class:border-red-500={genreError}>
-		    {#each categories as category, parentIndex}
-		        <div class="border p-2 mb-2 rounded bg-zinc-800">
-		            <button 
-		                onclick={() => toggleCategory(parentIndex)}
-		                class="font-bold"
-		                style="font-weight: {category.selected ? 'bold' : 'normal'}"
-		            >
-		            {category.expanded ? "[-]" : "[+]"} {category.name}
-		            </button>
-		            {#if category.expanded}
-		            {#each category.children as child, childIndex}
-		            <div class="ml-6">
-		                <input 
-		                    type="checkbox" 
-		                    checked={child.selected} 
-		                    onchange={() => toggleSelection(parentIndex, childIndex)} 
-		                />
-		                <span>{child.name}</span>
-		            </div>
-		            {/each}
-		            {/if}
-		        </div>
-		    {/each}
+			{#each categories as category, parentIndex}
+				<div class="category-item border p-2 mb-2 rounded bg-zinc-800">
+					<button 
+						onclick={() => toggleCategory(parentIndex)}
+						class="font-bold w-full text-left"
+						style="font-weight: {category.selected ? 'bold' : 'normal'}"
+					>
+						{category.expanded ? "^" : "+"} {category.name}
+					</button>
+					{#if category.expanded}
+					{#each category.children as child, childIndex}
+					<div class="ml-6">
+						<input 
+							type="checkbox" 
+							checked={child.selected} 
+							onchange={() => toggleSelection(parentIndex, childIndex)} 
+						/>
+						<span>{child.name}</span>
+					</div>
+					{/each}
+					{/if}
+				</div>
+			{/each}
 		</div>
 		{#if genreError}
 		    <span class="text-red-500 text-sm mt-2">Выберите жанр!</span>
@@ -440,12 +459,41 @@
 	</div>
 </div>
 <div class="flex justify-end mt-4">
-	<button onclick={confirmData} class="bg-blue-500 text-white p-2 rounded px-20">Далее</button>
+	<button onclick={confirmData} class="bg-gray-500 text-white p-2 rounded px-20">Далее</button>
 </div>
 
-	
 <style>
-		button {
-			cursor: pointer;
-		}
+    .category-item {
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 0.375rem; 
+    }
+
+    .category-item:hover {
+        background-color: rgba(59, 130, 246, 0.1); 
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); 
+    }
+
+    input {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 0.375rem; 
+    }
+
+    input:focus {
+        border-color: #3b82f6; 
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); 
+        outline: none; 
+    }
+
+    .border-red-500 {
+        border-color: #ef4444; 
+    }
+
+    button {
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #3b82f6; 
+    }
 </style>

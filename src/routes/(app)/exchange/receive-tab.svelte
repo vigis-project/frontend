@@ -158,33 +158,34 @@
 		
 		<div class="flex justify-between items-center mb-4">
 			<h2 class="text-xl font-semibold">Категории</h2>
-			<button onclick={clearSelection} class="bg-blue-500 text-white p-2 rounded px-4">Снять выделение</button>
+			<button onclick={clearSelection} class="bg-gray-500 text-white p-2 rounded px-4">Снять выделение</button>
 		</div>
 
 		<div class="overflow-y-auto flex-grow pr-2 border rounded bg-zinc-900 p-2">
-			{#each categories as category, parentIndex}
-			<div class="border p-2 mb-2 rounded bg-zinc-800">
-				<button 
-					onclick={() => toggleCategory(parentIndex)} 
-					class="font-bold"
-					style="font-weight: {category.selected ? 'bold' : 'normal'}"
-					>
-					{category.expanded ? "[-]" : "[+]"} {category.name}
-				</button>	
-				{#if category.expanded}
-				{#each category.children as child, childIndex}
-				<div class="ml-6">
-					<input 
-						type="checkbox" 
-						checked={child.selected} 
-						onchange={() => toggleSelection(parentIndex, childIndex)} />
-					<span>{child.name}</span>
-				</div>
-				{/each}
-				{/if}
-			</div>
-		{/each}
-		</div>
+            {#each categories as category, parentIndex}
+                <div class="category-item border p-2 mb-2 rounded bg-zinc-800">
+                    <button 
+                        onclick={() => toggleCategory(parentIndex)} 
+                        class="font-bold w-full text-left"
+                        style="font-weight: {category.selected ? 'bold' : 'normal'}"
+                    >
+                        {category.expanded ? "^" : "+"} {category.name}
+                    </button>
+                    {#if category.expanded}
+                        {#each category.children as child, childIndex}
+                            <div class="ml-6">
+                                <input 
+                                    type="checkbox" 
+                                    checked={child.selected} 
+                                    onchange={() => toggleSelection(parentIndex, childIndex)} 
+                                />
+                                <span>{child.name}</span>
+                            </div>
+                        {/each}
+                    {/if}
+                </div>
+            {/each}
+        </div>
 		<div class="flex justify-between mt-4">	
 		</div>
 	</div>
@@ -202,7 +203,38 @@
 </div>
 
 <style>
-		button {
-			cursor: pointer;
-		}
+	button {
+		cursor: pointer;
+	}
+	    .category-item {
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 0.375rem; 
+    }
+
+    .category-item:hover {
+        background-color: rgba(59, 130, 246, 0.1); 
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); 
+    }
+
+    input {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 0.375rem; 
+    }
+
+    input:focus {
+        border-color: #3b82f6; 
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); 
+        outline: none; 
+    }
+
+    
+
+    button {
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #3b82f6; 
+    }
 </style>
