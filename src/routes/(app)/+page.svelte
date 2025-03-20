@@ -33,7 +33,7 @@
 							group flex w-full flex-row sm:w-auto"
 						>
 							<p>Узнать больше</p>
-							<div class="relative">
+							<div class="relative inline-flex items-center">
 								<ChevronRight class="absolute size-7 opacity-70" />
 								<ChevronRight
 									class="absolute size-7 opacity-85 transition-transform 
