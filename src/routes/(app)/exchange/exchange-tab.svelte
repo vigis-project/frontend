@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { ChevronUp } from 'lucide-svelte';
+
 	type Props = {
 		onNextTab: () => void;
 		title: string;
@@ -450,37 +452,44 @@
 		<!-- Заголовок и кнопка "Снять выделение" -->
 		<div class="mb-4 flex items-center justify-between">
 			<h2 class="text-xl font-semibold">Категории</h2>
-			<button onclick={clearSelection} class="rounded bg-gray-500 p-2 px-4 text-white"
+			<button
+				onclick={clearSelection}
+				class="hover:bg-walnut-accent rounded bg-gray-500 p-2 px-4 text-white transition-colors"
 				>Снять выделение</button
 			>
 		</div>
 
 		<!-- Контейнер с прокруткой -->
 		<div
-			class="flex-grow overflow-y-auto rounded border bg-zinc-900 p-2 pr-2"
+			class="h-fit flex-grow overflow-y-auto rounded border bg-zinc-900 p-2 pr-2"
 			class:border-red-500={genreError}
 		>
 			{#each categories as category, parentIndex}
 				<div class="category-item mb-2 rounded border bg-zinc-800 p-2">
 					<button
 						onclick={() => toggleCategory(parentIndex)}
-						class="w-full text-left font-bold"
+						class="flex w-full flex-row items-center gap-3 text-left font-bold"
 						style="font-weight: {category.selected ? 'bold' : 'normal'}"
 					>
-						{category.expanded ? '^' : '+'}
+						<ChevronUp
+							class="size-5 transition-transform data-[selected]:rotate-180"
+							data-selected={category.expanded ? '' : undefined}
+						/>
 						{category.name}
 					</button>
 					{#if category.expanded}
-						{#each category.children as child, childIndex}
-							<div class="ml-6">
-								<input
-									type="checkbox"
-									checked={child.selected}
-									onchange={() => toggleSelection(parentIndex, childIndex)}
-								/>
-								<span>{child.name}</span>
-							</div>
-						{/each}
+						<ul class="mt-2">
+							{#each category.children as child, childIndex}
+								<li class="ml-6">
+									<input
+										type="checkbox"
+										checked={child.selected}
+										onchange={() => toggleSelection(parentIndex, childIndex)}
+									/>
+									<span>{child.name}</span>
+								</li>
+							{/each}
+						</ul>
 					{/if}
 				</div>
 			{/each}
@@ -491,7 +500,11 @@
 	</div>
 </div>
 <div class="mt-4 flex justify-end">
-	<button onclick={confirmData} class="rounded bg-gray-500 p-2 px-20 text-white">Далее</button>
+	<button
+		onclick={confirmData}
+		class="hover:bg-walnut-accent rounded bg-gray-500 p-2 px-20 text-white transition-colors"
+		>Далее</button
+	>
 </div>
 
 <style>
@@ -522,14 +535,5 @@
 
 	.border-red-500 {
 		border-color: #ef4444;
-	}
-
-	button {
-		cursor: pointer;
-		transition: background-color 0.3s ease;
-	}
-
-	button:hover {
-		background-color: #3b82f6;
 	}
 </style>

@@ -28,7 +28,7 @@
 
 <Card.Root class="mx-auto w-full max-w-6xl">
 	<Tabs.Root bind:value={currentTab} class="w-full">
-		<Tabs.List class="grid w-full grid-cols-3 rounded-none">
+		<Tabs.List class="grid w-full grid-cols-3 rounded-t-md">
 			<Tabs.Trigger value="exchange" class="rounded-none" disabled>
 				Хочу обменять
 			</Tabs.Trigger>
