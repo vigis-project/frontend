@@ -57,7 +57,7 @@
 			</div>
 		</section>
 
-		<section class="w-full py-12 md:py-16 lg:py-20">
+		<section class="w-full bg-white py-12 md:py-16 lg:py-20">
 			<div class=" px-4 md:px-6">
 				<div class="mx-auto max-w-3xl space-y-4 text-center">
 					<h2 class="text-walnut-dark text-3xl font-bold tracking-tighter sm:text-4xl">
