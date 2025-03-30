@@ -5,10 +5,12 @@
 
 <header class="bg-walnut-dark sticky top-0 z-10 border-b">
 	<div class="grid h-16 grid-cols-[1fr_max-content_1fr] px-4 md:px-6">
-		<a href="/" class="flex items-center gap-2">
-			<BookOpen class="text-walnut-light h-6 w-6" />
-			<span class="text-walnut-light text-xl font-bold">Vigis</span>
-		</a>
+		<div class="flex items-center">
+			<a href="/" class="flex items-center gap-2">
+				<BookOpen class="text-walnut-light h-6 w-6" />
+				<span class="text-walnut-light text-xl font-bold">Vigis</span>
+			</a>
+		</div>
 		<nav class="hidden grow flex-row items-center justify-center gap-6 text-sm md:flex">
 			<a
 				href="/catalog"
