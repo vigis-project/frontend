@@ -36,6 +36,15 @@
 	--sidebar-accent-foreground: hsl(240 5.9% 10%);
 	--sidebar-border: hsl(220 13% 91%);
 	--sidebar-ring: hsl(217.2 91.2% 59.8%);
+
+	--primary-green: hsl(83, 26%, 12%);
+	--primary-whiteish: hsl(56, 35%, 90%);
+
+	--walnut-dark: #2A2E22;
+	--walnut-light: #E8E3D0;
+	--walnut-muted: #3A3E32;
+	--walnut-accent: #D8D3C0;
+
 }
 
 .dark {
@@ -74,6 +83,8 @@
 }
 
 @theme inline {
+	--color-primary-green: var(--primary-green);
+	--color-primary-whiteish: var(--primary-whiteish);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -114,6 +125,10 @@
 	--animate-accordion-up: accordion-up 0.2s ease-out;
 
 	--font-graphiktt: 'GraphikTT', Arial, sans-serif;
+	--color-walnut-dark: var(--walnut-dark);
+	--color-walnut-light: var(--walnut-light);
+	--color-walnut-muted: var(--walnut-muted);
+	--color-walnut-accent: var(--walnut-accent);
 }
 
 @layer base {
