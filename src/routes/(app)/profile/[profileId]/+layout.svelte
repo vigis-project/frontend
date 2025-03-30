@@ -25,7 +25,7 @@
 			<a href={page} class="block p-4 hover:text-blue-700 hover:underline">{page}</a>
 		{/each}
 	</div>
-	<div class="grow bg-red-300">
+	<div class="grow bg-green-900">
 		{@render children()}
 	</div>
 </div>

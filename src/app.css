@@ -39,6 +39,12 @@
 
 	--primary-green: hsl(83, 26%, 12%);
 	--primary-whiteish: hsl(56, 35%, 90%);
+
+	--walnut-dark: #2A2E22;
+	--walnut-light: #E8E3D0;
+	--walnut-muted: #3A3E32;
+	--walnut-accent: #D8D3C0;
+
 }
 
 .dark {
@@ -119,6 +125,10 @@
 	--animate-accordion-up: accordion-up 0.2s ease-out;
 
 	--font-graphiktt: 'GraphikTT', Arial, sans-serif;
+	--color-walnut-dark: var(--walnut-dark);
+	--color-walnut-light: var(--walnut-light);
+	--color-walnut-muted: var(--walnut-muted);
+	--color-walnut-accent: var(--walnut-accent);
 }
 
 @layer base {
