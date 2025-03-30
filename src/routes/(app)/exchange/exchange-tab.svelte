@@ -1,4 +1,5 @@
 <script lang="ts">
+	
 	type Props = {
 		next: () => void;
 		title?: string;
@@ -10,42 +11,23 @@
 
 	let { next, title = $bindable(""), isbn = $bindable(""), lastName = $bindable(""), firstName = $bindable(""), year = $bindable()  }: Props = $props();
 
-
-		// Функция загрузки фамилий из БД (имитация)
-	async function fetchAuthors(query: string) {
-			if (query.length < 1) {
-					suggestions = [];
-					return;
-			}
-			// Здесь можно сделать реальный API-запрос
-			const allAuthors = ["Булгаков", "Бунин", "Блок", "Брюсов"];
-			suggestions = allAuthors.filter((author) => author.startsWith(query));
+	async function fetchAuthors(query: string) {	
+		if (query.length < 1) {
+				suggestions = [];
+				return;
+		}
+		const allAuthors = ["Булгаков", "Бунин", "Блок", "Брюсов"];
+		suggestions = allAuthors.filter((author) => author.startsWith(query));
 	}
 		
-		// Выбор автора из списка
 	function selectAuthor(author: string) {
 			lastName = author;
-			firstName = "Авто"; // Можно подтягивать имя из БД
+			firstName = "Авто"; 
 			suggestions = [];
 	}
 
-		// Подсказки для фамилии (будут подгружаться из БД)
 	let suggestions = $state<string[]>([]);
-	let selectedAuthor = $state<{ lastName: string; firstName: string } | null>(null);
-
-	function formatISBN(event: Event) {
-		let input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); // Удаляем все нецифровые символы
-
-		let formatted = "";
-		if (input.length > 0) formatted += input.slice(0, 3);
-		if (input.length > 3) formatted += "-" + input.slice(3, 4);
-		if (input.length > 4) formatted += "-" + input.slice(4, 9);
-		if (input.length > 9) formatted += "-" + input.slice(9, 12);
-		if (input.length > 12) formatted += "-" + input.slice(12, 13);
-
-		isbn = formatted;
-	}
-
+	
 	let categories = $state([
 	{
 			name: "Жанр",
@@ -142,13 +124,14 @@
 		categories[index].expanded = !categories[index].expanded;
 	}
 
-
-	
 	function toggleSelection(parentIndex: number, childIndex: number) {
-		categories[parentIndex].children[childIndex].selected = !categories[parentIndex].children[childIndex].selected;
-		categories[parentIndex].selected = categories[parentIndex].children.some(child => child.selected); // Обновляем родителя
-	} 
+    categories[parentIndex].children[childIndex].selected = !categories[parentIndex].children[childIndex].selected;
+    categories[parentIndex].selected = categories[parentIndex].children.some(child => child.selected);
 
+    if (categories[parentIndex].name === "Жанр") {
+        genreError = !categories[parentIndex].selected;
+    }
+}
 
 	function clearSelection() {
 		categories.map((category) => {
@@ -162,103 +145,275 @@
 			return { ...category  }
 		});
 	}
+ 
+ 	function validateField(value: string | number | undefined) {
+        if (typeof value === "string") {
+            return !value || value.trim() === "";
+        } else if (typeof value === "number") {
+            return value === undefined || isNaN(value);
+        }
+        return true; 
+    }
 
+	let firstNameEmptyError = $state(false);
+    let firstNameValidationError = $state(false);
+	let lastNameEmptyError = $state(false);
+    let lastNameValidationError = $state(false);
+	let titleEmptyError = $state(false);
+	let titleValidationError = $state(false);
+    let isbnEmptyError = $state(false);
+    let yearEmptyError = $state(false);
+	let yearValidationError = $state(false); 
+	let genreError = $state(false); 
 
-	function validateAndProceed() {
-		const cats = categories; // Получаем актуальные данные
-		console.log("Текущие категории:", cats);
+	function formatISBN(event: Event) {
+		let input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); 
 
-		const genre = cats.find(cat => cat.name === "Жанр");
-		console.log("Найдена категория 'Жанр':", genre);
+		let formatted = "";
+		if (input.length > 0) formatted += input.slice(0, 3);
+		if (input.length > 3) formatted += "-" + input.slice(3, 4);
+		if (input.length > 4) formatted += "-" + input.slice(4, 9);
+		if (input.length > 9) formatted += "-" + input.slice(9, 12);
+		if (input.length > 12) formatted += "-" + input.slice(12, 13);
 
-		if (!genre) {
-				alert("Категория 'Жанр' не найдена!");
-				return;
-		}
-
-		const isSelected = genre.children.some(child => child.selected);
-		console.log("Выбраны ли подкатегории жанра:", isSelected);
-
-		if (!isSelected) {
-				alert("Выберите хотя бы одну категорию в 'Жанр'!");
-				return;
-		}
-
-		console.log("Категория выбрана, выполняем переход...");
-
-		next();
+		isbn = formatted;
 	}
+
+	function formatyear(event: Event) {
+    	const input = (event.target as HTMLInputElement).value.replace(/\D/g, ""); 
+    	const maxLength = 4;
+    	const truncatedInput = input.slice(0, maxLength); 
+    	const currentYear = new Date().getFullYear(); 
+
+    	if (truncatedInput && Number(truncatedInput) > currentYear) {
+    	    yearValidationError = true; 
+    	} else {
+    	    yearValidationError = false;
+    	}
+
+    	year = truncatedInput ? Number(truncatedInput) : undefined; 
+	}
+
+	function validateYear(event: Event) {
+    	const input = (event.target as HTMLInputElement).value;
+    	const currentYear = new Date().getFullYear();
+    	const regex = /^\d{4}$/; 
+
+    	if (!regex.test(input) || Number(input) > currentYear) {
+    	    yearValidationError = true;
+    	} else {
+    	    yearValidationError = false;
+    	}
+	}
+
+	function validateLastName(event: Event) {
+    	const input = (event.target as HTMLInputElement).value;
+    	const regex = /^[A-Za-zА-Яа-яЁё]{2,50}$/; 
+		
+    	if (!regex.test(input)) {
+    	    lastNameValidationError = true;
+    	} else {
+    	    lastNameValidationError = false;
+    	}
+	}
+   
+    function validateFirstName(event: Event) {
+    	const input = (event.target as HTMLInputElement).value;
+    	const regex = /^[A-Za-zА-Яа-яЁё]{2,25}$/; 
+
+    	if (!regex.test(input)) {
+    	    firstNameValidationError = true;
+    	} else {
+    	    firstNameValidationError = false;
+    	}
+	}
+
+	function validateTitle(event: Event) {
+    	const input = (event.target as HTMLInputElement).value;
+    	const regex = /^[A-Za-zА-Яа-яЁё0-9\s"',.!?\-]{1,50}$/; 
+
+    	if (!regex.test(input)) {
+    	    titleValidationError = true;
+    	} else {
+    	    titleValidationError = false;
+    	}
+	}
+
+	
+
+	function validateAllFields() {
+    	const cats = categories;
+    	const genre = cats.find(cat => cat.name === "Жанр");
+    	if (!genre) {
+    	    genreError = true;
+    	    return false;
+    	}
+    	const isSelected = genre.children.some(child => child.selected);
+    	if (!isSelected) {
+    	    genreError = true;
+    	    return false;
+    	} else {
+    	    genreError = false;
+    	}
+
+    	lastNameEmptyError = validateField(lastName);
+    	firstNameEmptyError = validateField(firstName);
+    	titleEmptyError = validateField(title);
+    	isbnEmptyError = validateField(isbn);
+    	yearEmptyError = validateField(year);
+
+    	if (lastNameEmptyError || firstNameEmptyError || titleEmptyError || isbnEmptyError || yearEmptyError || yearValidationError) {
+    	    return false;
+    	}
+    	return true;
+	}
+
+    function confirmData() {
+        if (validateAllFields()) {
+            
+			next()
+		}
+    }
 </script>
 
 <div class="p-6 bg-zinc-900 rounded-lg shadow w-full flex">
 	<!-- Левая колонка -->
 	<div class="w-1/2 pr-4 flex flex-col h-[400px]">
 			<!-- Автор -->
-			<div class="mb-4">
+			<div class="flex">
+				<div class="w-1/2 mr-2" class:mb-6={!lastNameEmptyError && !lastNameValidationError}>
 					<span class="text-sm font-medium">Автор <span class="text-red-500 font-bold">*</span></span>
-					<div class="flex space-x-2">
-							<input
-									type="text"
-									autocomplete="family-name"
-									aria-label="Фамилия"
-									bind:value={lastName}
-									oninput={(e) => fetchAuthors((e.target as HTMLInputElement).value)}
-									placeholder="Фамилия"
-									class="border p-2 w-1/2 rounded"
-							/>
-							<input
-									type="text"
-									autocomplete="name"
-									aria-label="Имя"
-									bind:value={firstName}
-									placeholder="Имя"
-									class="border p-2 w-1/2 rounded"
-							/>
-					</div>
-					{#if suggestions.length}
-							<ul class="border mt-1 bg-zinc-900 absolute z-10">
-									{#each suggestions as suggestion}
-											<li>
-												<button onclick={() => selectAuthor(suggestion)} class="p-2 cursor-pointer hover:bg-gray-100">
-													{suggestion}
-												</button>
-											</li>
-									{/each}
-							</ul>
+					<input
+						type="text"
+						autocomplete="family-name"
+						aria-label="Фамилия"
+						bind:value={lastName}
+						onblur={(e) => {
+							lastNameEmptyError = validateField(lastName); 
+							validateLastName(e); 
+						}}
+						oninput={(e) => {
+							fetchAuthors((e.target as HTMLInputElement).value); 
+							validateLastName(e); 
+						}}
+						placeholder="Фамилия"
+						class="border p-2 w-full rounded"
+						class:border-red-500={lastNameEmptyError || lastNameValidationError}
+					/>
+					{#if lastNameEmptyError}
+						<span class="text-red-500 text-sm">Обязательно к заполнению.</span>
 					{/if}
-		</div>
-
-			<!-- Название книги -->
-			<div class="mb-4">
-					<label for="book-title" class="block text-sm font-medium">Название книги *</label>
-					<input id="book-title" type="text" bind:value={title} class="border p-2 w-full rounded" />
+					{#if lastNameValidationError && !lastNameEmptyError}
+						<span class="text-red-500 text-sm">Некорректный формат.</span>
+					{/if}
+				</div>
+			
+				<div class="w-1/2 mr-2 mt-6" class:mb-6={!firstNameEmptyError && !firstNameValidationError}>
+					<input
+						type="text"
+						autocomplete="name"
+						aria-label="Имя"
+						bind:value={firstName}
+						onblur={(e) => {
+							firstNameEmptyError = validateField(firstName);
+							validateFirstName(e);
+						}}
+						oninput={(e) => validateFirstName(e)}
+						placeholder="Имя"
+						class="border p-2 w-full rounded"
+						class:border-red-500={firstNameEmptyError || firstNameValidationError}
+					/>
+					{#if firstNameEmptyError}
+						<span class="text-red-500 text-sm">Обязательно к заполнению.</span>
+					{/if}
+					{#if firstNameValidationError && !firstNameEmptyError}
+						<span class="text-red-500 text-sm">Некорректный формат.</span>
+					{/if}
+				</div>
+			
+				{#if suggestions.length}
+					<ul class="border mt-1 bg-zinc-900 absolute z-10">
+						{#each suggestions as suggestion}
+							<li>
+								<button onclick={() => selectAuthor(suggestion)} class="p-2 cursor-pointer hover:bg-gray-100">
+									{suggestion}
+								</button>
+							</li>
+						{/each}
+					</ul>
+				{/if}
 			</div>
-
+			<!-- Название книги -->
+		<div class:mb-6={!titleEmptyError && !titleValidationError}>
+			<span  class="block text-sm font-medium">Название книги <span class="text-red-500 font-bold">*</span></span>
+			<input  
+				type="text" 
+				bind:value={title} 
+				class="border p-2 w-full rounded"
+				oninput={validateTitle}
+				onblur={(e) => {
+					titleEmptyError = validateField(title);
+					validateTitle(e);
+				}}
+				class:border-red-500={titleEmptyError || titleValidationError}
+			/>
+			{#if titleEmptyError}
+				<span class="text-red-500 text-sm">Обязательно к заполнению.</span>
+			{/if}
+			{#if titleValidationError && !titleEmptyError}
+				<span class="text-red-500 text-sm">Некорректный формат</span>
+			{/if}
+		</div>
 			<!-- ISBN и год издания -->
-		
 			<div class="mb-4">
 				<div class="flex space-x-2">
-						<div class="w-1/2">
-								<label for="isbn" class="block text-sm font-medium">ISBN *</label>
-								<input id="isbn"
-										type="text" 
-										bind:value={isbn} 
-										oninput={formatISBN}
-										placeholder="XXX-X-XXXXX-XXX-X"
-										class="border p-2 w-full rounded placeholder-opacity-50"
-								/>
-						</div>
-						<div class="w-1/2">
-								<label for="publish-year" class="block text-sm font-medium">Год издания *</label>
-								<input 
-										id="publish-year"
-										type="number" 
-										bind:value={year}
-										max={new Date().getFullYear()} 
-										placeholder="Год"
-										class="border p-2 w-full rounded"
-								/>
-						</div>
+					<!-- Поле ISBN -->
+					<div class="w-1/2">
+						<span class="block text-sm font-medium">ISBN <span class="text-red-500 font-bold">*</span></span>
+						<input
+							type="text"
+							bind:value={isbn}
+							oninput={(e) => { 
+								formatISBN(e); 
+								isbnEmptyError = validateField(isbn); 
+							}}
+							onblur={() => isbnEmptyError = validateField(isbn)} 
+							placeholder="XXX-X-XXXXX-XXX-X"
+							class="border p-2 w-full rounded placeholder-opacity-50"
+							class:border-red-500={isbnEmptyError}
+						/>
+						{#if isbnEmptyError}
+							<span class="text-red-500 text-sm">Обязательно к заполнению.</span>
+						{/if}
+					</div>
+			
+					<!-- Поле Год издания -->
+					<div class="w-1/2">
+						<span class="block text-sm font-medium">Год издания <span class="text-red-500 font-bold">*</span></span>
+						<input
+							type="text"
+							bind:value={year}
+							oninput={(e) => {
+								formatyear(e); 
+								yearEmptyError = validateField(year); 
+								validateYear(e);
+							}}
+							onblur={(e) => {
+								yearEmptyError = validateField(year);
+								validateYear(e); 
+							}}
+							max={new Date().getFullYear()}
+							placeholder="Год"
+							class="border p-2 w-full rounded"
+							class:border-red-500={yearEmptyError || yearValidationError}
+						/>
+						{#if yearEmptyError}
+							<span class="text-red-500 text-sm">Обязательно к заполнению.</span>
+						{/if}
+						{#if yearValidationError && !yearEmptyError}
+							<span class="text-red-500 text-sm">Некорректный формат.</span>
+						{/if}
+					</div>
 				</div>
 			</div>
 	</div>
@@ -268,47 +423,77 @@
 	<div class="w-1/2 pl-4 flex flex-col h-[400px]">
 		<!-- Заголовок и кнопка "Снять выделение" -->
 		<div class="flex justify-between items-center mb-4">
-				<h2 class="text-xl font-semibold">Категории</h2>
-				<button onclick={clearSelection} class="bg-blue-500 text-white p-2 rounded px-4">Снять выделение</button>
+			<h2 class="text-xl font-semibold">Категории</h2>
+			<button onclick={clearSelection} class="bg-gray-500 text-white p-2 rounded px-4">Снять выделение</button>
 		</div>
 
 		<!-- Контейнер с прокруткой -->
-		<div class="overflow-y-auto flex-grow pr-2 border rounded bg-zinc-900 p-2">
-				{#each categories as category, parentIndex}
-						<div class="border p-2 mb-2 rounded bg-zinc-800">
-								<button 
-										onclick={() => toggleCategory(parentIndex)} 
-										class="font-bold"
-										style="font-weight: {category.selected ? 'bold' : 'normal'}"
-								>
-										{category.expanded ? "[-]" : "[+]"} {category.name}
-								</button>
-
-								{#if category.expanded}
-										{#each category.children as child, childIndex}
-												<div class="ml-6">
-														<input 
-																type="checkbox" 
-																checked={child.selected} 
-																onchange={() => toggleSelection(parentIndex, childIndex)} 
-														/>
-														<span>{child.name}</span>
-												</div>
-										{/each}
-								{/if}
-						</div>
-				{/each}
+		<div class="overflow-y-auto flex-grow pr-2 border rounded bg-zinc-900 p-2" class:border-red-500={genreError}>
+			{#each categories as category, parentIndex}
+				<div class="category-item border p-2 mb-2 rounded bg-zinc-800">
+					<button 
+						onclick={() => toggleCategory(parentIndex)}
+						class="font-bold w-full text-left"
+						style="font-weight: {category.selected ? 'bold' : 'normal'}"
+					>
+						{category.expanded ? "^" : "+"} {category.name}
+					</button>
+					{#if category.expanded}
+					{#each category.children as child, childIndex}
+					<div class="ml-6">
+						<input 
+							type="checkbox" 
+							checked={child.selected} 
+							onchange={() => toggleSelection(parentIndex, childIndex)} 
+						/>
+						<span>{child.name}</span>
+					</div>
+					{/each}
+					{/if}
+				</div>
+			{/each}
 		</div>
-		<div class="flex justify-end mt-4">
-
-				<button onclick={validateAndProceed} class="bg-blue-500 text-white p-2 rounded w-[48%]">Далее</button>
-		</div>
+		{#if genreError}
+		    <span class="text-red-500 text-sm mt-2">Выберите жанр!</span>
+		{/if}
 	</div>
 </div>
+<div class="flex justify-end mt-4">
+	<button onclick={confirmData} class="bg-gray-500 text-white p-2 rounded px-20">Далее</button>
+</div>
 
-	
 <style>
-		button {
-			cursor: pointer;
-		}
+    .category-item {
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 0.375rem; 
+    }
+
+    .category-item:hover {
+        background-color: rgba(59, 130, 246, 0.1); 
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); 
+    }
+
+    input {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 0.375rem; 
+    }
+
+    input:focus {
+        border-color: #3b82f6; 
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); 
+        outline: none; 
+    }
+
+    .border-red-500 {
+        border-color: #ef4444; 
+    }
+
+    button {
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #3b82f6; 
+    }
 </style>
