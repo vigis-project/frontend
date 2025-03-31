@@ -3,7 +3,12 @@
 	import type { User } from '$lib/server/types';
 
 	const { children } = $props();
-	const pages = ['offers', 'overview', 'reviews', 'wishlist'];
+	const pages = [
+		{ href: 'overview', text: 'Главная' },
+		{ href: 'offers', text: 'Мои обмены' },
+		{ href: 'reviews', text: 'Мои обзоры' },
+		{ href: 'wishlist', text: 'Список желаемого' }
+	];
 
 	const testUser: User = {
 		id: 1,
@@ -17,15 +22,25 @@
 	};
 </script>
 
-<div></div>
-<div class="bg-gray-333 flex flex-row font-bold">
-	<div class="flex flex-col gap-2 bg-yellow-300 px-3">
+<div class="bg-gray-333 flex grow flex-row font-bold">
+	<div class="bg-walnut-muted flex flex-col gap-2 px-3 pt-6">
 		<ProfileInfo user={testUser} />
-		{#each pages as page}
-			<a href={page} class="block p-4 hover:text-blue-700 hover:underline">{page}</a>
-		{/each}
+		<nav class="border-walnut-light border-t">
+			<ul>
+				{#each pages as { href, text }}
+					<li class="mt-3">
+						<a
+							{href}
+							class="block px-2 py-1 text-sm hover:text-blue-700 hover:underline"
+						>
+							{text}
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</nav>
 	</div>
-	<div class="grow bg-green-900">
+	<div class="ml-6 grow border bg-green-900">
 		{@render children()}
 	</div>
 </div>
