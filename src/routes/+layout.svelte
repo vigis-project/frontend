@@ -4,7 +4,7 @@
 	let { children } = $props();
 </script>
 
-<div class="bg-background text-foreground">
+<div class="bg-walnut-accent text-white">
 	{@render children()}
 </div>
 <ModeWatcher modeStorageKey={'color-theme'} />

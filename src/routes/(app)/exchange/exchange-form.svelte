@@ -26,7 +26,7 @@
 	}
 </script>
 
-<Card.Root class="mx-auto w-full max-w-6xl">
+<Card.Root class="mx-auto w-full max-w-6xl text-white">
 	<Tabs.Root bind:value={currentTab} class="w-full">
 		<Tabs.List class="grid w-full grid-cols-3 rounded-t-md">
 			<Tabs.Trigger value="exchange" class="rounded-none" >

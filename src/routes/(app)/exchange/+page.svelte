@@ -3,8 +3,8 @@
 	import ExchangeForm from './exchange-form.svelte';
 </script>
 
-<div class="bg-walnut-accent h-full">
-	<main class="container mx-auto p-4 pt-24">
+<div class="bg-walnut-accent h-full my-auto">
+	<main class="h-full flex justify-center items-center">
 		<ExchangeForm />
 	</main>
 </div>

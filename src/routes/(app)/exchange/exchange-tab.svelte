@@ -287,7 +287,7 @@
                 </div>
                 <!-- Поле Год издания -->
 				<div class="w-1/2">
-					<span class="block text-sm font-medium">
+					<span class="block font-medium">
 						Год издания <span class="font-bold text-red-500">*</span>
 					</span>
 					
