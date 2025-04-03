@@ -16,7 +16,7 @@
 	{#key page.url}
 		<div
 			transition:fly={{ y: -10, duration: 250, delay: 0 }}
-			class="absolute h-[400px] w-[300px] overflow-visible"
+			class="absolute h-[500px] w-[300px] overflow-visible"
 		>
 			{@render children()}
 		</div>

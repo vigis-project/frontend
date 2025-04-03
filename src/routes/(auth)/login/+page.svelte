@@ -21,12 +21,18 @@
 	<div class="flex w-full flex-col items-center justify-center gap-3 py-3">
 		<div class="flex w-full items-center p-6 pt-0">
 			<button
-				class="focus-visible:ring-ring text-primary-foreground hover:bg-primary/90 bg-foreground inline-flex h-9 w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap shadow transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+				class="focus-visible:ring-ring inline-flex h-9
+				w-full items-center justify-center gap-2 rounded-md bg-white px-4
+				py-2 text-sm font-medium whitespace-nowrap text-black shadow transition-colors
+				hover:bg-white/90 focus-visible:ring-1 focus-visible:outline-none
+				disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none
+				[&_svg]:size-4 [&_svg]:shrink-0"
 				type="submit"
 			>
 				Вход
 			</button>
 		</div>
-		<a class="text-center" href="/register">to register</a>
+		<p class="text-center">Нет аккаунта?</p>
+		<a class="text-center" href="/register">Зарегистрироваться</a>
 	</div>
 </form>

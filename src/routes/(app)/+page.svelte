@@ -22,8 +22,8 @@
 					</p>
 					<div class="flex flex-col items-center gap-4 sm:flex-row">
 						<a
-							class="bg-walnut-light text-walnut-dark hover:bg-walnut-accent w-full
-							rounded-md px-2 py-1 text-lg font-semibold transition-colors sm:w-auto"
+							class="bg-walnut-light text-walnut-dark hover:bg-walnut-accent w-fit self-start
+							rounded-md px-2 py-1 text-lg font-semibold transition-colors sm:w-auto sm:self-auto"
 							href="/register"
 						>
 							Начать обмен

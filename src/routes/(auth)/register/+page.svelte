@@ -8,7 +8,7 @@
 	method="POST"
 >
 	<h1 class="text-center text-2xl font-semibold">Регистрация</h1>
-	<div class="flex flex-col gap-3 p-6">
+	<div class="flex grow flex-col justify-center gap-3 p-6">
 		<span class="flex flex-col gap-2">
 			<Label for="username">Никнейм</Label>
 			<Input id="username" name="username" type="text" autocomplete="username" />
@@ -22,15 +22,21 @@
 			<Input id="password" name="password" type="password" autocomplete="new-password" />
 		</span>
 	</div>
-	<div class="flex w-full flex-col items-center justify-center">
-		<div class="flex items-center p-6 pt-0">
+	<div class="flex w-full flex-col items-center justify-center gap-3 pb-3">
+		<div class="flex w-full items-center p-6">
 			<button
-				class="focus-visible:ring-ring text-primary-foreground hover:bg-primary/90 bg-foreground inline-flex h-9 w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium whitespace-nowrap shadow transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+				class="focus-visible:ring-ring inline-flex h-9
+				w-full items-center justify-center gap-2 rounded-md bg-white px-4
+				py-2 text-sm font-medium whitespace-nowrap text-black shadow transition-colors
+				hover:bg-white/90 focus-visible:ring-1 focus-visible:outline-none
+				disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none
+				[&_svg]:size-4 [&_svg]:shrink-0"
 				type="submit"
 			>
 				Зарегистрироваться
 			</button>
 		</div>
-		<a class="text-center" href="/login">to auth</a>
+		<p class="text-center">Есть аккаунт?</p>
+		<a class="text-center" href="/login">Войти</a>
 	</div>
 </form>
