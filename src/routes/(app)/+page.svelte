@@ -204,6 +204,4 @@
 			</div>
 		</section>
 	</main>
-
-	<Footer />
 </div>
