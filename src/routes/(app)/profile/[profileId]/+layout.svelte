@@ -58,10 +58,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="mx-auto mt-2 mb-4 flex h-full w-full max-w-[1280px] grow flex-col">
-		<nav class="mt-2 flex">
+	<div class="mx-auto mb-4 flex h-full w-full max-w-[1280px] grow flex-col">
+		<nav class="flex">
 			<ul
-				class="relative flex w-full flex-row gap-2 self-start overflow-auto overflow-y-hidden px-2 [scrollbar-width:none]"
+				class="bg-walnut-dark relative flex w-full flex-row gap-2 self-start overflow-auto overflow-y-hidden px-2 py-2 [scrollbar-width:none]"
 			>
 				{#each pages as { href, text }}
 					{@const normalizedHref = `/profile/${testUser.id}${href ? `/${href}` : ''}`}
@@ -70,7 +70,7 @@
 						<a
 							href={normalizedHref}
 							data-current={isCurrentUrl ? '' : undefined}
-							class="data-[current]:text-walnut-dark hover:text-walnut-muted relative
+							class="data-[current]:text-walnut-light hover:text-walnut-accent relative
 							w-full px-2 py-1 text-sm font-[510] tracking-tight text-nowrap text-white uppercase
 							transition-colors select-none"
 						>
@@ -79,7 +79,7 @@
 								<div
 									in:send={{ key: 'tabs' }}
 									out:receive={{ key: 'tabs' }}
-									class="bg-walnut-dark absolute bottom-0 left-[5%] h-0.5 w-[90%]"
+									class="bg-walnut-light absolute bottom-0 left-[5%] h-0.5 w-[90%]"
 								></div>
 							{/if}
 						</a>
