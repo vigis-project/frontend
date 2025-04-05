@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { BookOpen, ChevronRight, RefreshCw, Search } from 'lucide-svelte';
-	import BookExchange from '$lib/images/book-exchange.svg';
+	import BookExchange from '$lib/images/book-exchange.png';
 	import Footer from '$components/Footer.svelte';
 	import ProfilePlaceholder from '$components/ProfilePlaceholder.svelte';
 </script>
@@ -204,6 +204,4 @@
 			</div>
 		</section>
 	</main>
-
-	<Footer />
 </div>

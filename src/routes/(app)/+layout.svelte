@@ -5,8 +5,8 @@
 	const { children } = $props();
 </script>
 
-<div class="font-graphiktt min-h-screen w-full flex flex-col">
+<div class="font-graphiktt flex min-h-screen w-full flex-col">
 	<Header></Header>
 	{@render children()}
+	<Footer></Footer>
 </div>
-<!-- <Footer></Footer> -->

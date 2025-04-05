@@ -107,8 +107,7 @@
 			</div>
 		</div>
 		<div class="flex flex-col items-center justify-between gap-4 border-t pt-4 md:flex-row">
-			<span class="text-walnut-light/70 text-xs">© 2025 КнигоОбмен. Все права защищены.</span
-			>
+			<span class="text-walnut-light/70 text-xs">© 2025 Vigis. Все права защищены.</span>
 			<div class="flex items-center gap-4">
 				<a href="#" class="text-walnut-light/70 hover:text-walnut-light">
 					<svg
