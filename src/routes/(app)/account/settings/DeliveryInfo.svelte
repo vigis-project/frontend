@@ -40,12 +40,12 @@
 </script>
 
 
-<div class=" w-full rounded-lg bg-zinc-900 p-6 shadow">
+<div class=" w-full rounded-lg p-6 shadow bg-walnut-muted text-walnut-accent">
 	<!-- Левая колонка -->
 	<div class="w-full  flex flex-col items-center">
 		<!-- Город -->
         <Input 	
- 			class="w-full max-w-[400px] lg:w-[400px]"
+ 			class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black "
         	id="title" 
         	label="Город" 
         	bind:value={city}
@@ -58,7 +58,7 @@
     	/>
 		<!-- Улица -->
         <Input 
-			class="w-full max-w-[400px] lg:w-[400px]"
+			class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
         	id="title" 
         	label="Улица" 
         	bind:value={street}
@@ -71,7 +71,7 @@
     	/>
 
 		<Input 	
-			class="w-full max-w-[400px] lg:w-[400px]"
+			class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
         	id="household" 
         	label="Номер дома" 
         	bind:value={household}
@@ -83,7 +83,7 @@
         	data-valid={householdValid}
     	/>	
 		<Input 	
-			class="w-full max-w-[400px] lg:w-[400px]"
+			class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
 			id="flat" 
 			label="Квартира" 
 			bind:value={flat}
@@ -95,7 +95,7 @@
 			data-valid={flatValid}
 		/>
 		<Input
-			class="w-full max-w-[400px] lg:w-[400px]"
+			class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
 			id="index"
 			label="Индекс"
 			bind:value={index}

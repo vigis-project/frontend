@@ -111,7 +111,7 @@
 	
 </script>
 <div
-    class="h-96 overflow-y-auto rounded border bg-zinc-900 p-2 w-full max-w-[400px] lg:w-[400px]" 
+    class="h-96 overflow-y-auto rounded border bg-walnut-accent text-walnut-accent p-2 w-full max-w-[400px] lg:w-[400px] " 
     class:border-red-500={genreError}
 >
     {#each categories as category, parentIndex}
@@ -119,7 +119,7 @@
             <!-- Кнопка категории -->
             <button
                 onclick={() => toggleCategory(parentIndex)}
-                class="flex w-full items-center justify-between rounded bg-zinc-800 p-2 text-left"
+                class="flex w-full items-center justify-between rounded bg-walnut-muted p-2 text-left"
             >
                 <span class={category.selected ? 'font-bold' : ''}>{category.name}</span>
                 <ChevronUp
@@ -129,7 +129,7 @@
 
             <!-- Список подкатегорий -->
             {#if category.expanded}
-                <div class="mt-1 grid grid-cols-2 gap-2 bg-zinc-800 p-2">
+                <div class="mt-1 grid grid-cols-2 gap-2 bg-walnut-muted p-2">
                     {#each category.children as child, childIndex}
                         <label class="flex items-center space-x-2">
                             <input

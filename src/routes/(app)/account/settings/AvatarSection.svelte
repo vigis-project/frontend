@@ -30,7 +30,7 @@
 <div class="w-full  flex flex-col items-center">
     <!-- Фамилия -->
         <Input 
-            class="w-full max-w-[400px]  lg:w-[400px]"
+            class="w-full max-w-[400px]  lg:w-[400px] bg-walnut-accent text-black"
             id="lastName" 
             label="Фамилия" 
             bind:value={lastName}
@@ -44,7 +44,7 @@
     
     <!-- Имя -->
         <Input 
-            class="w-full max-w-[400px] lg:w-[400px]"
+            class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
             id="firstName" 
             label="Имя" 
             bind:value={firstName}
@@ -58,7 +58,7 @@
     
     <!-- Отчество -->
         <Input 
-            class="w-full max-w-[400px] lg:w-[400px]"
+            class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
             id="SurName" 
             label="Отчество" 
             bind:value={SurName}
@@ -70,39 +70,39 @@
             data-valid={SurNameValid}
         />
         <Input
-        class="w-full max-w-[400px] lg:w-[400px]"
-        id="email"
-        label="Почта"
-        bind:value={Email}
-        pattern={/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{8,100}$/} 
-        type="text" 
-        invalidMsg="Некорректный формат." 
-        placeholder="Test@mail.ru" 
-        required={false}
-        data-valid={EmailValid}
+            class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
+            id="email"
+            label="Почта"
+            bind:value={Email}
+            pattern={/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{8,100}$/} 
+            type="text" 
+            invalidMsg="Некорректный формат." 
+            placeholder="Test@mail.ru" 
+            required={false}
+            data-valid={EmailValid}
+        />
+        <Input 
+            class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
+            id="password"
+            label="Пароль"
+            bind:value={Password}
+            pattern={/^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)[\w!@#$%^&*()\-+=<>.,;:'"`~\[\]{}|\\\/]{8,50}$/}
+            type="text" 
+            invalidMsg="Некорректный формат." 
+            placeholder="" 
+            required={false}
+            data-valid={PasswordValid}
         />
         <Input
-        class="w-full max-w-[400px] lg:w-[400px]"
-        id="password"
-        label="Пароль"
-        bind:value={Password}
-        pattern={/^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)[\w!@#$%^&*()\-+=<>.,;:'"`~\[\]{}|\\\/]{8,50}$/}
-        type="text" 
-        invalidMsg="Некорректный формат." 
-        placeholder="" 
-        required={false}
-        data-valid={PasswordValid}
-        />
-        <Input
-        class="w-full max-w-[400px] lg:w-[400px]"
-        id="ConfirmPassword"
-        label="Подтвердите пароль"
-        bind:value={ConfirmPassword}
-        pattern={/^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)[\w!@#$%^&*()\-+=<>.,;:'"`~\[\]{}|\\\/]{8,50}$/}
-        type="text" 
-        invalidMsg="Некорректный формат." 
-        placeholder="" 
-        required={false}
-        data-valid={ConfirmPasswordValid}
+            class="w-full max-w-[400px] lg:w-[400px] bg-walnut-accent text-black"
+            id="ConfirmPassword"
+            label="Подтвердите пароль"
+            bind:value={ConfirmPassword}
+            pattern={/^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)[\w!@#$%^&*()\-+=<>.,;:'"`~\[\]{}|\\\/]{8,50}$/}
+            type="text" 
+            invalidMsg="Некорректный формат." 
+            placeholder="" 
+            required={false}
+            data-valid={ConfirmPasswordValid}
         />
 </div>

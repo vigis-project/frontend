@@ -16,7 +16,7 @@
     let ConfirmPassword = $state('');
 
 </script>
-<div class="mx-auto w-full max-w-4xl bg-zinc-900 rounded-lg p-6 text-white">
+<div class="mx-auto w-full max-w-4xl  rounded-lg p-6  bg-walnut-muted text-walnut-accent">
     <!-- Основной контейнер с grid-разметкой -->
     <div class="flex">
 
