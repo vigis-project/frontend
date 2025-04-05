@@ -1,53 +1,52 @@
 export interface User {
 	id: Number;
-	email: String;
-	username: String;
-	firstName: String;
-	lastName: String;
-	secondName: String;
-    avatar: String;
+	email: string;
+	username: string;
+	firstName: string;
+	lastName: string;
+	secondName: string;
+	avatar: string;
 	rating: Number;
-    city: String;
+	city: string;
 }
 
 export interface Exchange {
-    bookOffer: Book;
-    bookRequest: Book;
+	bookOffer: Book;
+	bookRequest: Book;
 	UserOffer: User;
 	UserRequest: User;
 }
 
 export interface Proposal {
-    FullMatch: Exchange[];
-    PartialMatch: Exchange[];
-    Recommended: Exchange[];
+	FullMatch: Exchange[];
+	PartialMatch: Exchange[];
+	Recommended: Exchange[];
 }
 
 export interface Message {
-    id: Number;
-    sender: String;
-    recipient: String;
-    subject: String;
-    body: String;
-    timestamp: Date;
+	id: Number;
+	sender: string;
+	recipient: string;
+	subject: string;
+	body: string;
+	timestamp: Date;
 }
 
 export interface Book {
-    id: Number;
-	author: String;
-    title: String;
-    data: String;
+	id: Number;
+	author: string;
+	title: string;
+	data: string;
 }
 
 export interface ExchangeCard {
-    exchange: Exchange;
-    OfferStatus: String;
-    RequestStatus: String;
+	exchange: Exchange;
+	OfferStatus: string;
+	RequestStatus: string;
 }
 
 export interface Review {
-    text : String;
-    user: User;
-    date: Date;
+	text: string;
+	user: User;
+	date: Date;
 }
-
