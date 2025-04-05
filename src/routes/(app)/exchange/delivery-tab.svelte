@@ -62,7 +62,7 @@
         		id="title" 
         		label="Город" 
         		bind:value={city}
-        		pattern={/^[A-Za-zА-Яа-яЁё0-9\s"',.!?\-]{1,50}$/} 
+				pattern={/^[А-Яа-яЁё0-9\s"',.!?\-]{3,30}$/} 
         		type="text" 
         		invalidMsg="Некорректный формат." 
         		placeholder="Москва" 
@@ -77,7 +77,7 @@
         		id="title" 
         		label="Улица" 
         		bind:value={street}
-        		pattern={/^[A-Za-zА-Яа-яЁё0-9\s"',.!?\-]{1,50}$/} 
+        		pattern={/^[А-Яа-яЁё0-9\s"',.!?\-]{3,25}$/} 
         		type="text" 
         		invalidMsg="Некорректный формат." 
         		placeholder="Название улицы" 
@@ -92,7 +92,7 @@
         		id="building" 
         		label="Номер строения" 
         		bind:value={building}
-        		pattern={/^[A-Za-zА-Яа-яЁё0-9\s"',.!?\-]{1,50}$/} 
+        		pattern={/^[0-9А-Яа-яЁё]{0,3}$/}
         		type="text" 
         		invalidMsg="Некорректный формат." 
         		placeholder="номер" 
@@ -106,7 +106,7 @@
         			id="household" 
         			label="Номер дома" 
         			bind:value={household}
-        			pattern={/^[A-Za-zА-Яа-яЁё0-9\s"',.!?\-]{1,50}$/} 
+        			pattern={/^(?=[0-9]*[А-Яа-яЁё]?[0-9]*$)[0-9А-Яа-яЁё]{1,5}$/}
         			type="text" 
         			invalidMsg="Некорректный формат." 
         			placeholder="дом" 
@@ -120,7 +120,7 @@
         			id="flat" 
         			label="Квартира" 
         			bind:value={flat}
-        			pattern={/^[A-Za-zА-Яа-яЁё0-9\s"',.!?\-]{1,50}$/} 
+        			pattern={/^(?=[0-9]*[А-Яа-яЁё]?[0-9]*$)[0-9А-Яа-яЁё]{0,5}$/}
         			type="text" 
         			invalidMsg="Некорректный формат." 
         			placeholder="" 
@@ -159,7 +159,7 @@
 			id="lastName" 
 			label="Фамилия" 
 			bind:value={lastName}
-			pattern={/^[A-Za-zА-Яа-яЁё]{2,50}$/} 
+			pattern={/^[А-Яа-яЁё]{2,50}$/} 
 			type="text" 
 			invalidMsg="Некорректный формат." 
 			placeholder="Сорокин" 
@@ -173,7 +173,7 @@
 			id="firstName" 
 			label="Имя" 
 			bind:value={firstName}
-			pattern={/^[A-Za-zА-Яа-яЁё]{2,25}$/} 
+			pattern={/^[А-Яа-яЁё]{2,25}$/} 
 			type="text" 
 			invalidMsg="Некорректный формат." 
 			placeholder="Андрей" 
@@ -188,7 +188,7 @@
 			id="SurName" 
 			label="Отчество" 
 			bind:value={SurName}
-			pattern={/^[A-Za-zА-Яа-яЁё]{2,25}$/} 
+			pattern={/^[А-Яа-яЁё]{0,25}$/} 
 			type="text" 
 			invalidMsg="Некорректный формат." 
 			placeholder="Иванович" 
