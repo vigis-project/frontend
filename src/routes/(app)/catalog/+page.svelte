@@ -1,27 +1,27 @@
 <script lang="ts">
+	import { City } from 'phosphor-svelte';
 	import cover from '$lib/images/cover.jpg';
-	import type { Book } from '$lib/server/types';
-	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
-
-	const books: Book[] = [
-		{ id: 6, author: 'Михаил Булгаков', title: 'Мастер и Маргарита', data: '...' },
-		{ id: 7, author: 'Николай Гоголь', title: 'Мертвые души', data: '...' },
-		{ id: 8, author: 'Иван Тургенев', title: 'Отцы и дети', data: '...' },
-		{ id: 9, author: 'Владимир Набоков', title: 'Лолита', data: '...' },
-		{ id: 10, author: 'Борис Пастернак', title: 'Доктор Живаго', data: '...' },
-		{ id: 1, author: 'Анна Ахматова', title: 'Реквием', data: '...' },
-		{ id: 2, author: 'Лев Толстой', title: 'Война и мир', data: '...' },
-		{ id: 3, author: 'Федор Достоевский', title: 'Преступление и наказание', data: '...' },
-		{ id: 4, author: 'Антон Чехов', title: 'Палата №6', data: '...' },
-		{ id: 5, author: 'Александр Пушкин', title: 'Евгений Онегин', data: '...' }
-	];
+	import { ChevronLeft, ChevronRight, Search } from 'lucide-svelte';
 </script>
 
-<div class="flex h-full flex-col justify-between">
+<div class="my-4 px-12">
+	<h1 class="text-walnut-muted mx-auto mb-4 w-fit text-4xl font-bold lg:text-6xl">Каталог</h1>
+	<section class="mx-auto flex h-12 w-full max-w-[720px] flex-row items-center gap-2">
+		<input
+			class="border-walnut-accent h-full w-full rounded-md bg-white px-3 text-black sm:grow lg:text-xl"
+			placeholder="Поиск..."
+		/>
+		<!-- <button class="h-full text-black">Все категории</button> -->
+		<button
+			class="h-full rounded-md border-neutral-500 bg-neutral-600 px-3 py-1 hover:border-neutral-300 hover:bg-neutral-400"
+		>
+			<Search class="size-6 lg:size-8" />
+		</button>
+	</section>
 	<section
 		class="mx-auto mt-6 grid w-fit grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 md:grid-cols-4 lg:gap-6 xl:grid-cols-5"
 	>
-		{#each books as book}
+		{#each { length: 15 }}
 			<a
 				href="#"
 				class="group relative size-fit max-w-[240px] overflow-hidden rounded-lg bg-white"
@@ -32,14 +32,18 @@
 					<h4
 						class="text-walnut-light overflow-hidden text-lg font-bold text-nowrap break-words text-ellipsis"
 					>
-						{book.title}
+						Отцы и дети
 					</h4>
 					<div class="flex flex-row items-center justify-between">
 						<p
 							class="text-walnut-light/80 overflow-hidden text-nowrap break-words text-ellipsis"
 						>
-							{book.author}
+							И. Тургенев
 						</p>
+						<div class="text-walnut-light/80 flex flex-row gap-1 text-sm">
+							<City size="20" fill="currentColor" />
+							<p class="font-medium">Москва</p>
+						</div>
 					</div>
 				</div>
 				<img
@@ -50,7 +54,7 @@
 			</a>
 		{/each}
 	</section>
-	<section class="mt-6 mb-4 flex flex-row justify-center gap-3">
+	<section class="mt-6 flex flex-row justify-center gap-3">
 		<button
 			class="bg-walnut-dark hover:bg-walnut-muted rounded-sm px-4 py-2
 			text-2xl font-semibold text-white transition-colors"
