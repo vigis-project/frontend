@@ -111,7 +111,7 @@
 	
 </script>
 <div
-    class="h-96 overflow-y-auto rounded border bg-zinc-900 p-2" 
+    class="h-96 overflow-y-auto rounded border bg-zinc-900 p-2 w-full max-w-[400px] lg:w-[400px]" 
     class:border-red-500={genreError}
 >
     {#each categories as category, parentIndex}

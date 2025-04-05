@@ -40,81 +40,72 @@
 </script>
 
 
-<div class="flex w-full rounded-lg bg-zinc-900 p-6 shadow">
+<div class=" w-full rounded-lg bg-zinc-900 p-6 shadow">
 	<!-- Левая колонка -->
-	<div class="flex flex-col pr-4">
+	<div class="w-full  flex flex-col items-center">
 		<!-- Город -->
-		<div>
-            <Input 	
-        		id="title" 
-        		label="Город" 
-        		bind:value={city}
-        		pattern={/^[А-Яа-яЁё0-9\s"',.!?\-]{3,30}$/} 
-        		type="text" 
-        		invalidMsg="Некорректный формат." 
-        		placeholder="Москва" 
-        		required
-        		data-valid={cityValid}
-    		/>
-		</div>
+        <Input 	
+ 			class="w-full max-w-[400px] lg:w-[400px]"
+        	id="title" 
+        	label="Город" 
+        	bind:value={city}
+        	pattern={/^[А-Яа-яЁё0-9\s"',.!?\-]{3,30}$/} 
+        	type="text" 
+        	invalidMsg="Некорректный формат." 
+        	placeholder="Москва" 
+        	required
+        	data-valid={cityValid}
+    	/>
 		<!-- Улица -->
-		<div>
-            <Input 
-				
-        		id="title" 
-        		label="Улица" 
-        		bind:value={street}
-        		pattern={/^[А-Яа-яЁё0-9\s"',.!?\-]{3,25}$/} 
-        		type="text" 
-        		invalidMsg="Некорректный формат." 
-        		placeholder="Название улицы" 
-        		required
-        		data-valid={streetValid}
-    		/>
-		</div>
-		<!-- Номер строение, Номер Дом, Номер квартиры, Индекс -->
-		<div class="flex">
-			<div class="mr-2 w-1/2" >
-				<Input 	
-        			id="household" 
-        			label="Номер дома" 
-        			bind:value={household}
-        			pattern={/^(?=[0-9]*[А-Яа-яЁё]?[0-9]*$)[0-9А-Яа-яЁё]{1,5}$/}
-        			type="text" 
-        			invalidMsg="Некорректный формат." 
-        			placeholder="дом" 
-        			required
-        			data-valid={householdValid}
-    			/>				
-			</div>
-			<div class="mr-2 w-1/2" >
-				<Input 	
-        			id="flat" 
-        			label="Квартира" 
-        			bind:value={flat}
-					pattern={/^(?=[0-9]*[А-Яа-яЁё]?[0-9]*$)[0-9А-Яа-яЁё]{0,5}$/}
-        			type="text" 
-        			invalidMsg="Некорректный формат." 
-        			placeholder="" 
-        			required={false}
-        			data-valid={flatValid}
-    			/>
-			</div>
-		</div>
+        <Input 
+			class="w-full max-w-[400px] lg:w-[400px]"
+        	id="title" 
+        	label="Улица" 
+        	bind:value={street}
+        	pattern={/^[А-Яа-яЁё0-9\s"',.!?\-]{3,25}$/} 
+        	type="text" 
+        	invalidMsg="Некорректный формат." 
+        	placeholder="Название улицы" 
+        	required
+        	data-valid={streetValid}
+    	/>
 
-		<div>
-				<Input
-				id="index"
-				label="Индекс"
-				bind:value={index}
-				pattern={/^\d{3}-\d-\d{5}-\d{3}-\d$/}
-				type="text"
-				invalidMsg="Некорректный формат Index."
-				placeholder="XXXYYY"
-				required
-				formatter={formatISBN}
-				data-valid={indexValid}
-			/>
-		</div>
+		<Input 	
+			class="w-full max-w-[400px] lg:w-[400px]"
+        	id="household" 
+        	label="Номер дома" 
+        	bind:value={household}
+        	pattern={/^(?=[0-9]*[А-Яа-яЁё]?[0-9]*$)[0-9А-Яа-яЁё]{1,5}$/}
+        	type="text" 
+        	invalidMsg="Некорректный формат." 
+        	placeholder="дом" 
+        	required
+        	data-valid={householdValid}
+    	/>	
+		<Input 	
+			class="w-full max-w-[400px] lg:w-[400px]"
+			id="flat" 
+			label="Квартира" 
+			bind:value={flat}
+			pattern={/^(?=[0-9]*[А-Яа-яЁё]?[0-9]*$)[0-9А-Яа-яЁё]{0,5}$/}
+			type="text" 
+			invalidMsg="Некорректный формат." 
+			placeholder="" 
+			required={false}
+			data-valid={flatValid}
+		/>
+		<Input
+			class="w-full max-w-[400px] lg:w-[400px]"
+			id="index"
+			label="Индекс"
+			bind:value={index}
+			pattern={/^\d{3}-\d-\d{5}-\d{3}-\d$/}
+			type="text"
+			invalidMsg="Некорректный формат Index."
+			placeholder="XXXYYY"
+			required
+			formatter={formatISBN}
+			data-valid={indexValid}
+		/>
 	</div>
 </div>
