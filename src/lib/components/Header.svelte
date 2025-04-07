@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import type { User } from '$lib/server/types';
+	import { Popover } from 'bits-ui';
 	import { BookOpen, Menu } from 'lucide-svelte';
 	import { Drawer } from 'vaul-svelte';
+
+	console.log(page.data);
 </script>
 
 {#snippet logo()}
@@ -51,14 +55,45 @@
 	</a>
 {/snippet}
 
+{#snippet profileIcon(userData: User)}
+	<Popover.Root>
+		<Popover.Trigger class="size-10 cursor-pointer overflow-hidden rounded-full bg-white">
+			<img src="/avatar.jpg" alt="Профиль" />
+		</Popover.Trigger>
+		<Popover.Portal>
+			<Popover.Content
+				class="bg-walnut-muted z-15 flex flex-col items-center justify-center rounded-md px-1 py-2 shadow"
+			>
+				<Popover.Arrow class="text-walnut-muted z-15" />
+				<a
+					class="rounded-md px-2 py-1 transition-colors hover:bg-neutral-900/40"
+					href="/profile/{userData.id}">Профиль</a
+				>
+				<div class="bg-walnut-accent mt-2 mb-1 h-px w-full"></div>
+				<a
+					class="rounded-md px-2 py-1 transition-colors hover:bg-neutral-900/40"
+					data-sveltekit-preload-data="off"
+					href="/logout">Выход</a
+				>
+			</Popover.Content>
+		</Popover.Portal>
+	</Popover.Root>
+{/snippet}
+
 <header class="bg-walnut-dark sticky top-0 z-10 h-16 border-b px-4 md:px-6">
-	<div class="hidden h-full grid-cols-[1fr_max-content_1fr] items-center justify-between md:grid">
+	<div
+		class="mx-6 hidden h-full grid-cols-[1fr_max-content_1fr] items-center justify-between md:grid"
+	>
 		{@render logo()}
 		<nav class="flex grow flex-row items-center justify-center gap-6 text-sm">
 			{@render navigationButtons()}
 		</nav>
 		<div class="flex grow items-center justify-end gap-6">
-			{@render authButtons()}
+			{#if page.data.userData}
+				{@render profileIcon(page.data.userData)}
+			{:else}
+				{@render authButtons()}
+			{/if}
 		</div>
 	</div>
 	<div class="flex h-full justify-between md:hidden">
@@ -77,7 +112,11 @@
 							{@render navigationButtons()}
 						</div>
 						<div class="flex flex-col gap-3">
-							{@render authButtons()}
+							{#if page.data.userData}
+								{@render profileIcon(page.data.userData)}
+							{:else}
+								{@render authButtons()}
+							{/if}
 						</div>
 					</div>
 				</Drawer.Content>

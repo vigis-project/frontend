@@ -1,3 +1,17 @@
+export interface CreateUserData {
+	email: string;
+	username: string;
+	password: string;
+	firstName: string;
+	lastName: string;
+	secondName: string;
+}
+
+export interface AuthUserData {
+	email: string;
+	password: string;
+}
+
 export interface User {
 	id: Number;
 	email: string;
@@ -5,9 +19,7 @@ export interface User {
 	firstName: string;
 	lastName: string;
 	secondName: string;
-	avatar: string;
-	rating: Number;
-	city: string;
+	roles: string[];
 }
 
 export interface Exchange {
@@ -24,7 +36,7 @@ export interface Proposal {
 }
 
 export interface Message {
-	id: Number;
+	id: number;
 	sender: string;
 	recipient: string;
 	subject: string;
@@ -33,10 +45,10 @@ export interface Message {
 }
 
 export interface Book {
-	id: Number;
-	author: string;
-	title: string;
-	data: string;
+	id: number;
+	bookName: string;
+	note: string;
+	authorId: number;
 }
 
 export interface ExchangeCard {

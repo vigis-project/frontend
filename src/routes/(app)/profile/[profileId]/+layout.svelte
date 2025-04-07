@@ -3,7 +3,7 @@
 	import type { User } from '$lib/server/types';
 	import { crossfade } from 'svelte/transition';
 
-	const { children } = $props();
+	const { data, children } = $props();
 	const pages = [
 		{ href: '', text: 'Профиль' },
 		{ href: 'proposals', text: 'Хочу обменять' },
@@ -20,17 +20,8 @@
 
 	const [send, receive] = crossfade({ duration: 150 });
 
-	const testUser: User = {
-		id: 1,
-		email: 'example@mail.com',
-		username: 'test_user',
-		firstName: 'Иван',
-		lastName: 'Иванов',
-		secondName: 'Иванович',
-		avatar: '/avatar.jpg',
-		rating: 4.8,
-		city: ''
-	};
+	const avatar = '/avatar.jpg';
+	const rating = 4.8;
 </script>
 
 <main class="flex w-full grow flex-col">
@@ -42,19 +33,15 @@
 				<div
 					class="flex size-[6rem] items-center justify-center overflow-hidden sm:size-[7.25rem] lg:size-[8.5rem] xl:size-[9.75rem]"
 				>
-					<img
-						class="size-full rounded-full object-cover"
-						src={testUser.avatar}
-						alt="Avatar"
-					/>
+					<img class="size-full rounded-full object-cover" src={avatar} alt="Avatar" />
 				</div>
 			</div>
 			<div
 				class="text-walnut-muted flex max-w-[30%] grow-0 basis-[30%] flex-col items-start justify-center"
 			>
-				<h1 class="text-4xl font-semibold">{testUser.username}</h1>
-				<p class="text-xl">{testUser.lastName} {testUser.firstName}</p>
-				<h3>{testUser.rating} ⭐️</h3>
+				<h1 class="text-4xl font-semibold">{data.user.username}</h1>
+				<p class="text-xl">{data.user.lastName} {data.user.firstName}</p>
+				<h3>{rating} ⭐️</h3>
 			</div>
 		</div>
 	</div>
@@ -64,7 +51,7 @@
 				class="bg-walnut-dark relative flex w-full flex-row gap-2 self-start overflow-auto overflow-y-hidden px-2 py-2 [scrollbar-width:none]"
 			>
 				{#each pages as { href, text }}
-					{@const normalizedHref = `/profile/${testUser.id}${href ? `/${href}` : ''}`}
+					{@const normalizedHref = `/profile/${data.user.id}${href ? `/${href}` : ''}`}
 					{@const isCurrentUrl = page.url.href.endsWith(normalizedHref)}
 					<li>
 						<a
