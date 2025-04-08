@@ -10,10 +10,6 @@
 		{ id: 4, author: 'Антон Чехов', title: 'Палата №6', data: '...' },
 		{ id: 5, author: 'Александр Пушкин', title: 'Евгений Онегин', data: '...' },
 		{ id: 6, author: 'Михаил Булгаков', title: 'Мастер и Маргарита', data: '...' },
-		{ id: 7, author: 'Николай Гоголь', title: 'Мертвые души', data: '...' },
-		{ id: 8, author: 'Иван Тургенев', title: 'Отцы и дети', data: '...' },
-		{ id: 9, author: 'Владимир Набоков', title: 'Лолита', data: '...' },
-		{ id: 10, author: 'Борис Пастернак', title: 'Доктор Живаго', data: '...' }
 	];
 
 	const users: User[] = [
@@ -60,38 +56,27 @@
 			avatar: '/avatars/sidorov.jpg',
 			city: 'Тверь',
 			rating: 4.5
-		},
-		{
-			id: 5,
-			email: 'popov@example.com',
-			username: 'Popov',
-			firstName: 'Дмитрий',
-			lastName: 'Попов',
-			secondName: 'Дмитриевич',
-			avatar: '/avatars/popov.jpg',
-			city: 'Краснодар',
-			rating: 4.3
 		}
 	];
 
 	const Exchanges: Exchange[] = [
 		{
-			bookOffer: books[7],
-			bookRequest: books[7],
-			UserOffer: users[0],
-			UserRequest: users[0]
+			bookOffer: books[1],
+			bookRequest: books[0],
+			userOffer: users[0],
+			userRequest: users[0]
 		},
 		{
-			bookOffer: books[7],
-			bookRequest: books[7],
-			UserOffer: users[0],
-			UserRequest: users[0]
+			bookOffer: books[2],
+			bookRequest: books[5],
+			userOffer: users[0],
+			userRequest: users[1]
 		},
 		{
-			bookOffer: books[7],
-			bookRequest: books[7],
-			UserOffer: users[0],
-			UserRequest: users[0]
+			bookOffer: books[3],
+			bookRequest: books[0],
+			userOffer: users[0],
+			userRequest: users[2]
 		}
 	];
 </script>

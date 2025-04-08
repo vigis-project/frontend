@@ -13,8 +13,8 @@ export interface User {
 export interface Exchange {
 	bookOffer: Book;
 	bookRequest: Book;
-	UserOffer: User;
-	UserRequest: User;
+	userOffer: User;
+	userRequest: User;
 }
 
 export interface Proposal {
@@ -40,10 +40,13 @@ export interface Book {
 }
 
 export interface ExchangeCard {
-	exchange: Exchange;
-	OfferStatus: string;
-	RequestStatus: string;
+    exchange: Exchange;
+    offerStatus: string;
+    requestStatus: string;
+    offerNumber?: number;
+    requestNumber?: number;
 }
+
 
 export interface Review {
 	text: string;
