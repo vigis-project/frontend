@@ -17,7 +17,7 @@
 			data: '1869',
 			id: 2
 		},
-        UserOffer: {
+        userOffer: {
             id: 1,
             email: 'offer@example.com',
             username: 'offer_user',
@@ -28,7 +28,7 @@
             rating: 4.8,
             city: 'Москва'
         },
-        UserRequest: {
+        userRequest: {
             id: 2,
             email: 'request@example.com',
             username: 'request_user',
@@ -40,8 +40,11 @@
             city: 'Санкт-Петербург'
         }
         },
-        OfferStatus: 'Принято',
-        RequestStatus: 'Ожидает подтверждения'
+        offerStatus: 'Принято',
+        requestStatus: 'Ожидает подтверждения',
+        requestNumber: 1111,
+        offerNumber: 0,
+        
     };
 
 </script>
