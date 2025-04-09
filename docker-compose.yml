@@ -1,0 +1,16 @@
+services:
+    svelte-app:
+        build: .
+        ports:
+            - '4173:4173'
+        env_file:
+            - ./.env
+        environment:
+            - API_HOST=${API_HOST}
+            - API_PORT=${API_PORT}
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge

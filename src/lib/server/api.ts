@@ -1,6 +1,7 @@
 import type { AuthUserData, CreateUserData, User } from './types';
+import { env } from '$env/dynamic/private';
 
-const BASE_URL = 'http://localhost:3000/';
+const BASE_URL = `http://${env['API_HOST']}:${env['API_PORT'] ?? 3000}/`;
 
 export async function registerUser(data: CreateUserData) {
 	try {
