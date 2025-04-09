@@ -48,7 +48,7 @@ export interface Book {
 	id: number;
 	bookName: string;
 	note: string;
-	authorId: number;
+	author: string;
 }
 
 export interface ExchangeCard {

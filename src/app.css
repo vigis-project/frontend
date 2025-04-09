@@ -40,11 +40,31 @@
 	--primary-green: hsl(83, 26%, 12%);
 	--primary-whiteish: hsl(56, 35%, 90%);
 
-	--walnut-dark: #2A2E22;
-	--walnut-light: #E8E3D0;
-	--walnut-muted: #3A3E32;
-	--walnut-accent: #D8D3C0;
+	--walnut-dark: #2a2e22;
+	--walnut-light: #e8e3d0;
+	--walnut-muted: #3a3e32;
+	--walnut-accent: #d8d3c0;
 
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@keyframes accordion-down {
+	from {
+		height: 0;
+	}
+	to {
+		height: var(--bits-accordion-content-height);
+	}
+}
+
+@keyframes accordion-up {
+	from {
+		height: var(--bits-accordion-content-height);
+	}
+	to {
+		height: 0;
+	}
 }
 
 .dark {

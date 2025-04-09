@@ -6,8 +6,6 @@ export const load: LayoutServerLoad = async ({ params, cookies }) => {
 	let token: string | undefined;
 
 	if ((token = cookies.get('token'))) {
-		console.log(token);
-
 		const user = await getUserData(token, Number(params['profileId']));
 
 		if (user) {

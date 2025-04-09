@@ -4,16 +4,16 @@
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 
 	const books: Book[] = [
-		{ id: 6, author: 'Михаил Булгаков', title: 'Мастер и Маргарита', data: '...' },
-		{ id: 7, author: 'Николай Гоголь', title: 'Мертвые души', data: '...' },
-		{ id: 8, author: 'Иван Тургенев', title: 'Отцы и дети', data: '...' },
-		{ id: 9, author: 'Владимир Набоков', title: 'Лолита', data: '...' },
-		{ id: 10, author: 'Борис Пастернак', title: 'Доктор Живаго', data: '...' },
-		{ id: 1, author: 'Анна Ахматова', title: 'Реквием', data: '...' },
-		{ id: 2, author: 'Лев Толстой', title: 'Война и мир', data: '...' },
-		{ id: 3, author: 'Федор Достоевский', title: 'Преступление и наказание', data: '...' },
-		{ id: 4, author: 'Антон Чехов', title: 'Палата №6', data: '...' },
-		{ id: 5, author: 'Александр Пушкин', title: 'Евгений Онегин', data: '...' }
+		{ id: 6, author: 'Михаил Булгаков', bookName: 'Мастер и Маргарита', note: '' },
+		{ id: 7, author: 'Николай Гоголь', bookName: 'Мертвые души', note: '' },
+		{ id: 8, author: 'Иван Тургенев', bookName: 'Отцы и дети', note: '' },
+		{ id: 9, author: 'Владимир Набоков', bookName: 'Лолита', note: '' },
+		{ id: 10, author: 'Борис Пастернак', bookName: 'Доктор Живаго', note: '' },
+		{ id: 1, author: 'Анна Ахматова', bookName: 'Реквием', note: '' },
+		{ id: 2, author: 'Лев Толстой', bookName: 'Война и мир', note: '' },
+		{ id: 3, author: 'Федор Достоевский', bookName: 'Преступление и наказание', note: '' },
+		{ id: 4, author: 'Антон Чехов', bookName: 'Палата №6', note: '' },
+		{ id: 5, author: 'Александр Пушкин', bookName: 'Евгений Онегин', note: '' }
 	];
 </script>
 
@@ -32,7 +32,7 @@
 					<h4
 						class="text-walnut-light overflow-hidden text-lg font-bold text-nowrap break-words text-ellipsis"
 					>
-						{book.title}
+						{book.bookName}
 					</h4>
 					<div class="flex flex-row items-center justify-between">
 						<p

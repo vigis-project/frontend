@@ -4,19 +4,17 @@
 	import { crossfade } from 'svelte/transition';
 
 	const { data, children } = $props();
-	const pages = [
+	let isAuthorized = $derived(!!data.userData && data.user.id == data.userData.id);
+
+	const rawPages = $derived([
 		{ href: '', text: 'Профиль' },
 		{ href: 'proposals', text: 'Хочу обменять' },
 		{ href: 'wishlist', text: 'Хочу получить' },
-		{ href: 'active_exchanges', text: 'Активные обмены' },
-		{ href: 'archive_exchanges', text: 'Архив' },
+		isAuthorized ? { href: 'exchanges', text: 'Обмены' } : undefined,
 		{ href: 'reviews', text: 'Отзывы' }
-		// Должны быть доступны, если пользователь - владелец страницы
-		// { href: 'exchanges', text: 'Обмены' },
-		// { href: 'proposed_exchanges', text: 'Предложения для обмена' },
-		// { href: 'settings', text: 'Настройки' },
-		// { href: '', text: 'Выход' },
-	];
+	]);
+
+	const pages = $derived(rawPages.filter((page) => !!page));
 
 	const [send, receive] = crossfade({ duration: 150 });
 
@@ -24,7 +22,7 @@
 	const rating = 4.8;
 </script>
 
-<main class="flex w-full grow flex-col">
+<main class="flex min-h-[900px] w-full grow flex-col">
 	<div class="border-walnut-muted border-b">
 		<div class="mx-auto mt-6 mb-4 flex w-full max-w-[1280px]">
 			<div
@@ -74,38 +72,8 @@
 				{/each}
 			</ul>
 		</nav>
-		<section class="w-full grow">
+		<section class="mt-2 w-full grow">
 			{@render children()}
 		</section>
 	</div>
 </main>
-
-<!-- <div class="bg-gray-333 grid h-fit grow grid-cols-[260px_1fr] flex-row bg-white font-bold">
-	<div>
-
-	</div>
-	<aside
-		class="bg-walnut-muted sticky top-16 left-0 flex h-full w-full flex-col gap-2 overflow-y-auto px-3 pt-6 md:block md:h-screen"
-	>
-		<ProfileInfo user={testUser} />
-		<nav class="border-walnut-light border-t">
-			<ul>
-				{#each pages as { href, text }}
-					<li class="mt-2">
-						<a
-							{href}
-							data-current={page.url.href.endsWith(href) ? '' : undefined}
-							class="hover:text-walnut-accent block p-2 font-medium text-white transition-colors data-[current]:underline"
-						>
-							{text}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</nav>
-	</aside>
-
-	<main class="mt-8 mb-2 pr-8 pl-2">
-		{@render children()}
-	</main>
-</div> -->

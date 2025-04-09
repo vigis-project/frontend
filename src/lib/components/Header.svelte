@@ -5,7 +5,7 @@
 	import { BookOpen, Menu } from 'lucide-svelte';
 	import { Drawer } from 'vaul-svelte';
 
-	console.log(page.data);
+	let open = $state(false);
 </script>
 
 {#snippet logo()}
@@ -56,7 +56,7 @@
 {/snippet}
 
 {#snippet profileIcon(userData: User)}
-	<Popover.Root>
+	<Popover.Root bind:open>
 		<Popover.Trigger class="size-10 cursor-pointer overflow-hidden rounded-full bg-white">
 			<img src="/avatar.jpg" alt="Профиль" />
 		</Popover.Trigger>
@@ -67,14 +67,45 @@
 				<Popover.Arrow class="text-walnut-muted z-15" />
 				<a
 					class="rounded-md px-2 py-1 transition-colors hover:bg-neutral-900/40"
-					href="/profile/{userData.id}">Профиль</a
+					onclick={() => (open = false)}
+					href="/profile/{userData.id}"
 				>
+					Профиль
+				</a>
+				<a
+					class="rounded-md px-2 py-1 transition-colors hover:bg-neutral-900/40"
+					onclick={() => (open = false)}
+					href="/exchange/new"
+				>
+					Начать обмен
+				</a>
+				{#if userData.roles.includes('ADMIN')}
+					<div class="bg-walnut-accent mt-2 mb-1 h-px w-full"></div>
+					<a
+						class="rounded-md px-2 py-1 transition-colors hover:bg-neutral-900/40"
+						onclick={() => (open = false)}
+						href="/admin"
+					>
+						Админ-панель
+					</a>
+				{/if}
 				<div class="bg-walnut-accent mt-2 mb-1 h-px w-full"></div>
 				<a
 					class="rounded-md px-2 py-1 transition-colors hover:bg-neutral-900/40"
-					data-sveltekit-preload-data="off"
-					href="/logout">Выход</a
+					onclick={() => (open = false)}
+					href="/account/settings"
 				>
+					Настройки
+				</a>
+				<div class="bg-walnut-accent mt-2 mb-1 h-px w-full"></div>
+				<a
+					class="rounded-md px-2 py-1 transition-colors hover:bg-neutral-900/40 hover:text-red-500"
+					data-sveltekit-preload-data="off"
+					onclick={() => (open = false)}
+					href="/logout"
+				>
+					Выход
+				</a>
 			</Popover.Content>
 		</Popover.Portal>
 	</Popover.Root>

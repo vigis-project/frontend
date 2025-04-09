@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { BookOpen, ChevronRight, RefreshCw, Search } from 'lucide-svelte';
 	import BookExchange from '$lib/images/book-exchange.png';
-	import Footer from '$components/Footer.svelte';
 	import ProfilePlaceholder from '$components/ProfilePlaceholder.svelte';
 </script>
 
@@ -158,7 +157,7 @@
 					</div>
 				</div>
 				<div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-					{#each [1, 2, 3, 4] as testimonial}
+					{#each { length: 4 }}
 						<div class="bg-walnut-dark rounded-lg border p-6">
 							<div class="flex items-start space-x-4">
 								<ProfilePlaceholder class="fill-walnut-accent size-10" />
@@ -168,7 +167,7 @@
 								</div>
 							</div>
 							<span class="text-walnut-light/70 mt-4">
-								"Благодаря КнигоОбмену я нашла редкое издание, которое давно искала.
+								"Благодаря Vigis я нашла редкое издание, которое давно искала.
 								Процесс обмена прошел очень легко и приятно. Теперь регулярно
 								обмениваюсь книгами и познакомилась с интересными людьми."
 							</span>
