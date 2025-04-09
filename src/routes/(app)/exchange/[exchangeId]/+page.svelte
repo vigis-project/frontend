@@ -3,6 +3,7 @@
 	import * as Card from '$components/components-ui/Card';
 	import { ArrowLeftRight, CheckCircle2, Clock, Package, Send, Truck } from 'lucide-svelte';
 	import cover from '$lib/images/cover.jpg';
+	import cover2 from '$lib/images/cover-2.jpg';
 	import { AlertDialog, Dialog } from 'bits-ui';
 	import Input from '$components/Input.svelte';
 
@@ -128,7 +129,7 @@
 				<Card.Content>
 					<div class="flex gap-4">
 						<img
-							src={cover}
+							src={cover2}
 							alt={exchangeData.receivingBook.bookName}
 							width="100"
 							height="150"

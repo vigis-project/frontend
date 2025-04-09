@@ -11,7 +11,7 @@
 </script>
 
 <form
-	class="border-walnut-accent bg-walnut-muted flex size-full flex-col rounded-md border p-3 shadow-md shadow-neutral-900/30"
+	class="border-walnut-accent bg-walnut-muted/80 flex size-full flex-col rounded-md border p-3 shadow-md shadow-neutral-900/30"
 	method="POST"
 	use:enhance={() => {
 		loading = true;
@@ -31,11 +31,23 @@
 	<div class="flex grow flex-col justify-center gap-3 p-6">
 		<span class="flex flex-col gap-2">
 			<Label for="email">Почта</Label>
-			<Input id="email" name="email" type="email" autocomplete="email" />
+			<Input
+				class="bg-walnut-muted/80 focus:bg-walnut-dark/80"
+				id="email"
+				name="email"
+				type="email"
+				autocomplete="email"
+			/>
 		</span>
 		<span class="flex flex-col gap-2">
 			<Label for="password">Пароль</Label>
-			<Input id="password" name="password" type="password" autocomplete="new-password" />
+			<Input
+				class="bg-walnut-muted/80 focus:bg-walnut-dark/80"
+				id="password"
+				name="password"
+				type="password"
+				autocomplete="new-password"
+			/>
 		</span>
 	</div>
 	<div class="relative flex w-full flex-col items-center justify-center gap-3 py-3">
@@ -62,6 +74,8 @@
 			</button>
 		</div>
 		<p class="text-center">Нет аккаунта?</p>
-		<a class="text-center" href="/register">Зарегистрироваться</a>
+		<a class="text-walnut-accent hover:text-walnut-light text-center" href="/register"
+			>Зарегистрироваться</a
+		>
 	</div>
 </form>

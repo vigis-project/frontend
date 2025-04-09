@@ -19,6 +19,7 @@ export async function registerUser(data: CreateUserData) {
 
 			return token;
 		} else {
+			console.log(await response.json());
 			// Handle error
 			return undefined;
 		}

@@ -15,7 +15,7 @@
 </script>
 
 <form
-	class="border-walnut-accent bg-walnut-muted flex size-full flex-col rounded-md border p-3 shadow-md shadow-neutral-900/30"
+	class="border-walnut-accent bg-walnut-muted/80 flex size-full flex-col rounded-md border p-3 shadow-md shadow-neutral-900/30"
 	method="POST"
 	use:enhance={() => {
 		loading = true;
@@ -35,15 +35,28 @@
 			<div class="flex grow flex-col justify-center gap-1 p-6">
 				<span class="flex flex-col gap-2">
 					<Label for="username">Никнейм</Label>
-					<Input id="username" name="username" type="text" autocomplete="username" />
+					<Input
+						class="bg-walnut-muted/80 focus:bg-walnut-dark/80"
+						id="username"
+						name="username"
+						type="text"
+						autocomplete="username"
+					/>
 				</span>
 				<span class="flex flex-col gap-2">
 					<Label for="email">Почта</Label>
-					<Input id="email" name="email" type="email" autocomplete="email" />
+					<Input
+						class="bg-walnut-muted/80 focus:bg-walnut-dark/80"
+						id="email"
+						name="email"
+						type="email"
+						autocomplete="email"
+					/>
 				</span>
 				<span class="flex flex-col gap-2">
 					<Label for="password">Пароль</Label>
 					<Input
+						class="bg-walnut-muted/80 focus:bg-walnut-dark/80"
 						id="password"
 						name="password"
 						type="password"
@@ -75,15 +88,28 @@
 			<div class="flex grow flex-col justify-center gap-1 p-6">
 				<span class="flex flex-col gap-2">
 					<Label for="firstName">Имя</Label>
-					<Input id="firstName" name="firstName" type="text" autocomplete="name" />
+					<Input
+						class="bg-walnut-muted/80 focus:bg-walnut-dark/80"
+						id="firstName"
+						name="firstName"
+						type="text"
+						autocomplete="name"
+					/>
 				</span>
 				<span class="flex flex-col gap-2">
 					<Label for="lastName">Фамилия</Label>
-					<Input id="lastName" name="lastName" type="text" autocomplete="family-name" />
+					<Input
+						class="bg-walnut-muted/80 focus:bg-walnut-dark/80"
+						id="lastName"
+						name="lastName"
+						type="text"
+						autocomplete="family-name"
+					/>
 				</span>
 				<span class="flex flex-col gap-2">
 					<Label for="secondName">Отчество</Label>
 					<Input
+						class="bg-walnut-muted/80 focus:bg-walnut-dark/80"
 						id="secondName"
 						name="secondName"
 						type="text"
@@ -128,7 +154,9 @@
 					</button>
 				</div>
 				<p class="text-center">Есть аккаунт?</p>
-				<a class="text-center" href="/login">Войти</a>
+				<a class="text-walnut-accent hover:text-walnut-light text-center" href="/login">
+					Войти
+				</a>
 			</div>
 		</Tabs.Content>
 	</Tabs.Root>
